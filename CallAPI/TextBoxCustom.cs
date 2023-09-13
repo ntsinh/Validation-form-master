@@ -46,12 +46,12 @@ namespace GUI.Components.Textboxs
                 lblError.Show();
                 await Task.Delay(5000);
                 lblError.Hide();
-                errorProvider.SetError(txt, "");
+                errorProvider.SetError(txt, null);
             }
             else
             {
                 lblError.Hide();
-                errorProvider.SetError(txt, "");
+                errorProvider.SetError(txt, null);
             }
         }
         public ErrorProvider errorProvider1 { get; set; }
@@ -109,7 +109,7 @@ namespace GUI.Components.Textboxs
             set
             {
                 lblError.Text = value;
-                txt.Focus();
+                //txt.Focus();
                 errorProvider.SetError(txt, value);
             }
         }

@@ -72,11 +72,13 @@ namespace UserControl2
             //    userControl12.BorderColor = Color.Red;
             //    label4.Text = "Password phải từ 8 - 20 kí tự";
             //}
-            if (eyeHurt > 3)
+            if (eyeHurt > 2)
             {
+                
                 if (userControl12.textBox1_Text.Equals("sorry"))
                 {
                     eyeHurt = 0;
+                    btnLogin.Enabled = true;
                 }
             }
         }
@@ -136,9 +138,10 @@ namespace UserControl2
 
         private void pbEye_MouseEnter(object sender, EventArgs e)
         {
-            if (eyeHurt > 3)
+            if (eyeHurt > 2)
             {
                 pbEye.Location = new Point(550, 225);
+                btnLogin.Enabled = false;
             }
         }
 

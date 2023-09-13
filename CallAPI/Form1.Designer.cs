@@ -41,9 +41,9 @@
             btnThem = new GUI.CustomButton();
             btnSua = new GUI.CustomButton();
             tableLayoutPanel1 = new TableLayoutPanel();
-            txtMaKho = new GUI.Components.Textboxs.TextBoxCustom();
             txtTenKho = new GUI.Components.Textboxs.TextBoxCustom();
             txtMoTa = new GUI.Components.Textboxs.TextBoxCustom();
+            txtMaKho = new GUI.Components.Textboxs.TextBoxCustom();
             ((System.ComponentModel.ISupportInitialize)dgvKho).BeginInit();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
@@ -120,7 +120,6 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
-            panel2.BorderStyle = BorderStyle.FixedSingle;
             panel2.Controls.Add(label4);
             panel2.Controls.Add(btnXoa);
             panel2.Controls.Add(btnThem);
@@ -156,7 +155,7 @@
             btnXoa.ForeColor = Color.White;
             btnXoa.Image = GUI.Properties.Resources.delete25;
             btnXoa.ImageAlign = ContentAlignment.MiddleLeft;
-            btnXoa.Location = new Point(701, 6);
+            btnXoa.Location = new Point(703, 6);
             btnXoa.Name = "btnXoa";
             btnXoa.Padding = new Padding(0, 0, 12, 0);
             btnXoa.Size = new Size(100, 35);
@@ -183,7 +182,7 @@
             btnThem.ForeColor = Color.White;
             btnThem.Image = GUI.Properties.Resources.addNew25;
             btnThem.ImageAlign = ContentAlignment.MiddleLeft;
-            btnThem.Location = new Point(489, 6);
+            btnThem.Location = new Point(491, 6);
             btnThem.Name = "btnThem";
             btnThem.Padding = new Padding(0, 0, 5, 0);
             btnThem.Size = new Size(100, 35);
@@ -208,7 +207,7 @@
             btnSua.ForeColor = Color.White;
             btnSua.Image = GUI.Properties.Resources.update25;
             btnSua.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSua.Location = new Point(595, 6);
+            btnSua.Location = new Point(597, 6);
             btnSua.Name = "btnSua";
             btnSua.Padding = new Padding(0, 0, 12, 0);
             btnSua.Size = new Size(100, 35);
@@ -237,25 +236,6 @@
             tableLayoutPanel1.Size = new Size(790, 75);
             tableLayoutPanel1.TabIndex = 9;
             // 
-            // txtMaKho
-            // 
-            txtMaKho.AllowNull = true;
-            txtMaKho.AllowWhiteSpace = true;
-            txtMaKho.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            txtMaKho.BackColor = Color.White;
-            txtMaKho.Error = "";
-            txtMaKho.Font = new Font("Calibri", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            txtMaKho.Label = "Mã kho xuất";
-            txtMaKho.Location = new Point(2, 5);
-            txtMaKho.Margin = new Padding(2);
-            txtMaKho.MinimumSize = new Size(0, 65);
-            txtMaKho.Multiline = false;
-            txtMaKho.Name = "txtMaKho";
-            txtMaKho.ReadOnly = false;
-            txtMaKho.Size = new Size(209, 65);
-            txtMaKho.TabIndex = 0;
-            txtMaKho.ValidationType = GUI.Components.Textboxs.TextBoxCustom.eValidationType.SpecialChar;
-            // 
             // txtTenKho
             // 
             txtTenKho.AllowNull = true;
@@ -263,6 +243,7 @@
             txtTenKho.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtTenKho.BackColor = Color.White;
             txtTenKho.Error = "";
+            txtTenKho.errorProvider1 = null;
             txtTenKho.Font = new Font("Calibri", 9F, FontStyle.Regular, GraphicsUnit.Point);
             txtTenKho.Label = "Tên kho xuất";
             txtTenKho.Location = new Point(215, 5);
@@ -282,6 +263,7 @@
             txtMoTa.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtMoTa.BackColor = Color.White;
             txtMoTa.Error = "";
+            txtMoTa.errorProvider1 = null;
             txtMoTa.Font = new Font("Calibri", 9F, FontStyle.Regular, GraphicsUnit.Point);
             txtMoTa.Label = "Mô tả";
             txtMoTa.Location = new Point(428, 5);
@@ -293,6 +275,26 @@
             txtMoTa.Size = new Size(360, 65);
             txtMoTa.TabIndex = 2;
             txtMoTa.ValidationType = GUI.Components.Textboxs.TextBoxCustom.eValidationType.SpecialChar;
+            // 
+            // txtMaKho
+            // 
+            txtMaKho.AllowNull = true;
+            txtMaKho.AllowWhiteSpace = true;
+            txtMaKho.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            txtMaKho.BackColor = Color.White;
+            txtMaKho.Error = "";
+            txtMaKho.errorProvider1 = null;
+            txtMaKho.Font = new Font("Calibri", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            txtMaKho.Label = "Mã kho xuất";
+            txtMaKho.Location = new Point(2, 5);
+            txtMaKho.Margin = new Padding(2);
+            txtMaKho.MinimumSize = new Size(0, 65);
+            txtMaKho.Multiline = false;
+            txtMaKho.Name = "txtMaKho";
+            txtMaKho.ReadOnly = false;
+            txtMaKho.Size = new Size(209, 65);
+            txtMaKho.TabIndex = 0;
+            txtMaKho.ValidationType = GUI.Components.Textboxs.TextBoxCustom.eValidationType.SpecialChar;
             // 
             // Form1
             // 

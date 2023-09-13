@@ -140,18 +140,25 @@ namespace GUI
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            LoginForm lg = new LoginForm();
-            string hour = DateTime.Now.ToString("HH");
+        }
+        private void pbUser_Click(object sender, EventArgs e)
+        {
+            showSubmenu(pnlDstk, pbUser);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            int hour = DateTime.Now.Hour;
             string LoginUser = Program.userName;
-            if (int.Parse(hour) < 11)
+            if (hour < 11)
             {
                 lbUser.Text = "Chào buổi sáng " + LoginUser;
             }
-            else if (int.Parse(hour) < 15)
+            else if (hour < 13)
             {
                 lbUser.Text = "Chào buổi trưa " + LoginUser;
             }
-            else if (int.Parse(hour) < 18)
+            else if (hour < 19)
             {
                 lbUser.Text = "Chào buổi chiều " + LoginUser;
             }
@@ -163,20 +170,23 @@ namespace GUI
 
             ApiBLL apiBLL = new ApiBLL();
             List<User> u = (List<User>)apiBLL.getJsonForGUI();
-            bool access = false;
             foreach (User user in u)
             {
                 if (user.Rule.Equals("Quản trị viên") && user.Username.Equals(LoginUser))
                 {
+                    pnlDsUser.Visible = true;
                     Program.rule = "Quản trị viên";
                 }
-                if (user.Rule.Equals("Kiểm duyệt viên") && user.Username.Equals(LoginUser))
-                {
-                    Program.rule = "Kiểm duyệt viên";
-                }
-                if (user.Rule.Equals("Khách") && user.Username.Equals(LoginUser))
+               if (user.Rule.Equals("Kiểm duyệt viên") && user.Username.Equals(LoginUser))
                 {
                     pnlDsUser.Visible = false;
+                    pnlDstk.Visible = false;
+                    Program.rule = "Kiểm duyệt viên";
+                }
+                 if (user.Rule.Equals("Khách") && user.Username.Equals(LoginUser))
+                {
+                    pnlDsUser.Visible = false;
+                    pnlDstk.Visible = false;
                     Program.rule = "Khách";
                 }
 

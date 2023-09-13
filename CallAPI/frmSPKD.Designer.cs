@@ -51,7 +51,6 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
-            panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(label1);
             panel1.Controls.Add(btnThem);
             panel1.Controls.Add(btnSua);
@@ -87,7 +86,7 @@
             btnThem.ForeColor = Color.White;
             btnThem.Image = Properties.Resources.addNew25;
             btnThem.ImageAlign = ContentAlignment.MiddleLeft;
-            btnThem.Location = new Point(489, 6);
+            btnThem.Location = new Point(491, 6);
             btnThem.Name = "btnThem";
             btnThem.Padding = new Padding(0, 0, 5, 0);
             btnThem.Size = new Size(100, 35);
@@ -112,7 +111,7 @@
             btnSua.ForeColor = Color.White;
             btnSua.Image = Properties.Resources.update25;
             btnSua.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSua.Location = new Point(595, 6);
+            btnSua.Location = new Point(597, 6);
             btnSua.Name = "btnSua";
             btnSua.Padding = new Padding(0, 0, 15, 0);
             btnSua.Size = new Size(100, 35);
@@ -137,7 +136,7 @@
             btnXoa.ForeColor = Color.White;
             btnXoa.Image = Properties.Resources.delete25;
             btnXoa.ImageAlign = ContentAlignment.MiddleLeft;
-            btnXoa.Location = new Point(701, 6);
+            btnXoa.Location = new Point(703, 6);
             btnXoa.Name = "btnXoa";
             btnXoa.Padding = new Padding(0, 0, 15, 0);
             btnXoa.Size = new Size(100, 35);

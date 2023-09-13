@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             pnlSideBar = new Panel();
             pnlDstk = new Panel();
             button9 = new Button();
@@ -62,6 +64,7 @@
             lbUser = new Label();
             panel5 = new Panel();
             tblShowForm = new TableLayoutPanel();
+            timer1 = new System.Windows.Forms.Timer(components);
             pnlSideBar.SuspendLayout();
             pnlDstk.SuspendLayout();
             pnlDsUser.SuspendLayout();
@@ -190,6 +193,7 @@
             pbUser.Size = new Size(20, 12);
             pbUser.TabIndex = 7;
             pbUser.TabStop = false;
+            pbUser.Click += pbUser_Click;
             // 
             // pnlSubmenuDonHang
             // 
@@ -574,6 +578,11 @@
             tblShowForm.Size = new Size(814, 545);
             tblShowForm.TabIndex = 1;
             // 
+            // timer1
+            // 
+            timer1.Enabled = true;
+            timer1.Tick += timer1_Tick;
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -581,6 +590,7 @@
             ClientSize = new Size(1064, 545);
             Controls.Add(tblShowForm);
             Controls.Add(pnlSideBar);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MdiChildrenMinimizedAnchorBottom = false;
             MinimumSize = new Size(1080, 584);
             Name = "FormMain";
@@ -647,5 +657,6 @@
         private Button button2;
         private Panel pnlUser;
         private Label lbUser;
+        private System.Windows.Forms.Timer timer1;
     }
 }

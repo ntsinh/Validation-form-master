@@ -242,6 +242,7 @@
             tableLayoutPanel2.Controls.Add(label1, 0, 0);
             tableLayoutPanel2.Controls.Add(cbbRule, 0, 1);
             tableLayoutPanel2.Controls.Add(lbError, 0, 2);
+            tableLayoutPanel2.Dock = DockStyle.Fill;
             tableLayoutPanel2.Location = new Point(591, 0);
             tableLayoutPanel2.Margin = new Padding(0);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -267,11 +268,11 @@
             // 
             // cbbRule
             // 
-            cbbRule.Dock = DockStyle.Fill;
+            cbbRule.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             cbbRule.DropDownStyle = ComboBoxStyle.DropDownList;
             cbbRule.FormattingEnabled = true;
             cbbRule.Items.AddRange(new object[] { "Quản trị viên", "Kiểm duyệt viên", "Khách" });
-            cbbRule.Location = new Point(10, 30);
+            cbbRule.Location = new Point(10, 31);
             cbbRule.Margin = new Padding(10, 0, 10, 0);
             cbbRule.Name = "cbbRule";
             cbbRule.Size = new Size(179, 23);
@@ -316,6 +317,7 @@
             dgvUser.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvUser.Size = new Size(764, 361);
             dgvUser.TabIndex = 0;
+            dgvUser.CellClick += dgvUser_CellClick;
             // 
             // userName
             // 
