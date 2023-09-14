@@ -247,18 +247,26 @@ namespace GUI
                 bool check = false;
                 //kiểm tra xem rule của user muốn xóa có phải là qtv không
                 // nếu đúng => gọi hàm checkRule kiểm tra
-                foreach (User us in listUsers)
-                {
-                    if (us.Rule=="Quản trị viên")
-                    {
-                        check = true;
-                    }
-                }
-                if (check)
+                //foreach (User us in listUsers)
+                //{
+                //    if (us.Rule=="Quản trị viên")
+                //    {
+                //        check = true;
+                //    }
+                //}
+                if (cbbRule.Text == "Quản trị viên")
                 {
                     if (CheckRule("Xoa"))
                     {
-                        listUsers.Remove(user);
+                        DialogResult dr = MessageBox.Show("Tài khoản này đang là Quản trị viên, bạn có chắc muốn xóa? ", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (dr == DialogResult.Yes)
+                        {
+                            listUsers.Remove(user);
+                        }
+                        else
+                        {
+                            return;
+                        }
                     }
                     else
                     {
@@ -269,6 +277,7 @@ namespace GUI
                 {
                     listUsers.Remove(user);
                 }
+                MessageBox.Show("Xóa thành công");
                 saveJson();
                 resetDgvUser();
                 dgvUser.DataSource = listUsers;
@@ -286,7 +295,7 @@ namespace GUI
             DataGridViewRow row = dgvUser.Rows[e.RowIndex];
             //kiểm tra nếu textboxUser trống hoặc có value khác với value của cellClick => fill value từ cellClick vào textbox
             //nếu khác thì làm trống textbox => mục đích khi ngươi dùng nhấn vào cùng 1 cell lần đầu thì fill value, lần 2 sẽ clear value
-            if (!tbUser.Text.Equals(row.Cells[0].Value.ToString())||tbUser.Text=="")
+            if (!tbUser.Text.Equals(row.Cells[0].Value.ToString()) || tbUser.Text == "")
             {
                 tbUser.Text = row.Cells[0].Value.ToString();
                 if (row.Cells[2].Value != null)
@@ -305,7 +314,7 @@ namespace GUI
                 dgvUser.ClearSelection();
                 Clear();
             }
-            
+
         }
         public bool CheckRule(String btnClick)
         {
@@ -337,7 +346,7 @@ namespace GUI
                         //kiểm tra nguồn event button_click
                         //nếu từ btnSua thì cho phép thực thi
                         //nếu từ btnXoa thì hủy => không cho phép xóa user đang đăng nhập
-                        if (btnClick=="Sua")
+                        if (btnClick == "Sua")
                         {
                             DialogResult dr = MessageBox.Show("Sau khi thay đổi bạn sẽ không còn quyền quản lý user nữa ", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                             if (dr == DialogResult.Yes)

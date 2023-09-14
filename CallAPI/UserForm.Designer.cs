@@ -290,7 +290,6 @@
             lbError.Padding = new Padding(0, 0, 0, 4);
             lbError.Size = new Size(189, 19);
             lbError.TabIndex = 0;
-            lbError.Text = "Vai trò";
             lbError.Visible = false;
             // 
             // panel3
