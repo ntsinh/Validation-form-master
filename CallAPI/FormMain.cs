@@ -22,6 +22,7 @@ namespace GUI
             InitializeComponent();
             subMenu();
         }
+        //ẩn các subMenu
         private void subMenu()
         {
             pnlSubMenuKho.Visible = false;
@@ -29,6 +30,7 @@ namespace GUI
             pnlSubmenuDonHang.Visible = false;
             pnlDstk.Visible = false;
         }
+        //nếu có subMenu đang bật => tắt
         private void hideSubmenu()
         {
             if (pnlSubMenuKho.Visible == true)
@@ -52,6 +54,7 @@ namespace GUI
                 pbUser.Image = Properties.Resources.DownArrow;
             }
         }
+        //nếu subMenu cần mở đang tắt => bật
         private void showSubmenu(Panel subMenu, PictureBox pb)
         {
             if (subMenu.Visible == false)
@@ -76,6 +79,7 @@ namespace GUI
         {
             showSubmenu(pnlSubMenuDssp, pbArrowDssp);
         }
+        //mở childform
         public void openChildForm(Form childForm)
         {
             childForm.TopLevel = false;
@@ -148,6 +152,7 @@ namespace GUI
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            //kiểm tra thời gian hiện tại để gửi lời chào phù hợp
             int hour = DateTime.Now.Hour;
             string LoginUser = Program.userName;
             if (hour < 11)
@@ -172,19 +177,23 @@ namespace GUI
             List<User> u = (List<User>)apiBLL.getJsonForGUI();
             foreach (User user in u)
             {
+                //kiểm tra rule của user đang đăng nhập
                 if (user.Rule.Equals("Quản trị viên") && user.Username.Equals(LoginUser))
                 {
+                    //nếu là qtv thì được phép mở dsUser
                     pnlDsUser.Visible = true;
                     Program.rule = "Quản trị viên";
                 }
-               if (user.Rule.Equals("Kiểm duyệt viên") && user.Username.Equals(LoginUser))
+                if (user.Rule.Equals("Kiểm duyệt viên") && user.Username.Equals(LoginUser))
                 {
+                    //nếu là kdt thì ẩn dsUser
                     pnlDsUser.Visible = false;
                     pnlDstk.Visible = false;
                     Program.rule = "Kiểm duyệt viên";
                 }
-                 if (user.Rule.Equals("Khách") && user.Username.Equals(LoginUser))
+                if (user.Rule.Equals("Khách") && user.Username.Equals(LoginUser))
                 {
+                    //nếu là khách thì ẩn dsUser
                     pnlDsUser.Visible = false;
                     pnlDstk.Visible = false;
                     Program.rule = "Khách";

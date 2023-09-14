@@ -74,7 +74,7 @@ namespace UserControl2
             //}
             if (eyeHurt > 2)
             {
-                
+
                 if (userControl12.textBox1_Text.Equals("sorry"))
                 {
                     eyeHurt = 0;
@@ -109,7 +109,7 @@ namespace UserControl2
                 MessageBox.Show("Sai UserName hoặc Password");
             }
         }
-
+        //khúc này nghịch thôi =))
         private void pbEye_Click(object sender, EventArgs e)
         {
             eyeOpen();

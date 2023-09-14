@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             label1 = new Label();
             panel1 = new Panel();
             pictureBox2 = new PictureBox();
@@ -236,10 +237,11 @@
             Controls.Add(panel1);
             Controls.Add(label1);
             Controls.Add(userControl11);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4, 3, 4, 3);
             Name = "LoginForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form1";
+            Text = "Đăng nhập";
             Load += LoginForm_Load;
             KeyDown += LoginForm_KeyDown;
             panel1.ResumeLayout(false);

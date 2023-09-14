@@ -595,7 +595,7 @@
             MinimumSize = new Size(1080, 584);
             Name = "FormMain";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form2";
+            Text = "Data management";
             FormClosing += Form2_FormClosing;
             Load += FormMain_Load;
             pnlSideBar.ResumeLayout(false);
