@@ -21,6 +21,8 @@ namespace GUI
         {
             InitializeComponent();
             subMenu();
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
         }
         //ẩn các subMenu
         private void subMenu()
@@ -201,5 +203,120 @@ namespace GUI
 
             }
         }
+        #region Title bar event
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnMaximize_Click(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Maximized)
+            {
+                btnMaximize.Image = Properties.Resources.maximize;
+                WindowState = FormWindowState.Normal;
+            }
+            else if (WindowState == FormWindowState.Normal)
+            {
+                WindowState = FormWindowState.Maximized;
+                btnMaximize.Image = Properties.Resources.restore_down;
+            }
+        }
+
+        private void btnMinimize_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnClose_MouseEnter(object sender, EventArgs e)
+        {
+            btnClose.BackColor = Color.Red;
+        }
+
+        private void btnClose_MouseLeave(object sender, EventArgs e)
+        {
+            btnClose.BackColor = Color.Transparent;
+        }
+
+        private void btnMaximize_MouseEnter(object sender, EventArgs e)
+        {
+            btnMaximize.BackColor = Color.FromArgb(89, 206, 143);
+        }
+
+        private void btnMaximize_MouseLeave(object sender, EventArgs e)
+        {
+            btnMaximize.BackColor = Color.Transparent;
+        }
+
+        private void btnMinimize_MouseEnter(object sender, EventArgs e)
+        {
+            btnMinimize.BackColor = Color.FromArgb(89, 206, 143);
+        }
+
+        private void btnMinimize_MouseLeave(object sender, EventArgs e)
+        {
+            btnMinimize.BackColor = Color.Transparent;
+        }
+
+        private void pnlTitleBar_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (WindowState == FormWindowState.Maximized)
+            {
+                btnMaximize.Image = Properties.Resources.maximize;
+                WindowState = FormWindowState.Normal;
+            }
+            else if (WindowState == FormWindowState.Normal)
+            {
+                WindowState = FormWindowState.Maximized;
+                btnMaximize.Image = Properties.Resources.restore_down;
+            }
+        }
+        bool drag = false;
+        int xLast, yLast;
+        private void pnlTitleBar_MouseDown(object sender, MouseEventArgs e)
+        {
+            drag = true;
+            xLast = e.X;
+            yLast = e.Y;
+        }
+
+        private void pnlTitleBar_MouseUp(object sender, MouseEventArgs e)
+        {
+            drag = false;
+        }
+
+        private void pnlTitleBar_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (drag)
+            {
+                this.SetDesktopLocation(MousePosition.X - xLast, MousePosition.Y - yLast);
+            }
+        }
+        #endregion
+        #region
+        private const int cGrip = 16;      // Grip size
+        private const int cCaption = 32;   // Caption bar height;
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == 0x84)
+            {  // Trap WM_NCHITTEST
+                Point pos = new Point(m.LParam.ToInt32());
+                pos = this.PointToClient(pos);
+                if (pos.Y < cCaption)
+                {
+                    m.Result = (IntPtr)2;  // HTCAPTION
+                    return;
+                }
+                if (pos.X >= this.ClientSize.Width - cGrip && pos.Y >= this.ClientSize.Height - cGrip)
+                {
+                    m.Result = (IntPtr)17; // HTBOTTOMRIGHT
+                    return;
+                }
+            }
+            base.WndProc(ref m);
+        }
+        #endregion
+
+
     }
 }

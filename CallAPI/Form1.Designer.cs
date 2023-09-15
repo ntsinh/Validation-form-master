@@ -62,7 +62,7 @@
             dgvKho.ReadOnly = true;
             dgvKho.RowTemplate.Height = 25;
             dgvKho.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvKho.Size = new Size(764, 361);
+            dgvKho.Size = new Size(780, 365);
             dgvKho.TabIndex = 0;
             dgvKho.CellClick += dgvKho_CellClick;
             // 
@@ -114,7 +114,7 @@
             panel3.Controls.Add(dgvKho);
             panel3.Location = new Point(12, 145);
             panel3.Name = "panel3";
-            panel3.Size = new Size(790, 388);
+            panel3.Size = new Size(806, 392);
             panel3.TabIndex = 11;
             // 
             // panel2
@@ -127,7 +127,7 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(814, 50);
+            panel2.Size = new Size(830, 50);
             panel2.TabIndex = 10;
             // 
             // label4
@@ -155,7 +155,7 @@
             btnXoa.ForeColor = Color.White;
             btnXoa.Image = GUI.Properties.Resources.delete25;
             btnXoa.ImageAlign = ContentAlignment.MiddleLeft;
-            btnXoa.Location = new Point(703, 6);
+            btnXoa.Location = new Point(719, 6);
             btnXoa.Name = "btnXoa";
             btnXoa.Padding = new Padding(0, 0, 12, 0);
             btnXoa.Size = new Size(100, 35);
@@ -182,7 +182,7 @@
             btnThem.ForeColor = Color.White;
             btnThem.Image = GUI.Properties.Resources.addNew25;
             btnThem.ImageAlign = ContentAlignment.MiddleLeft;
-            btnThem.Location = new Point(491, 6);
+            btnThem.Location = new Point(507, 6);
             btnThem.Name = "btnThem";
             btnThem.Padding = new Padding(0, 0, 5, 0);
             btnThem.Size = new Size(100, 35);
@@ -207,7 +207,7 @@
             btnSua.ForeColor = Color.White;
             btnSua.Image = GUI.Properties.Resources.update25;
             btnSua.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSua.Location = new Point(597, 6);
+            btnSua.Location = new Point(613, 6);
             btnSua.Name = "btnSua";
             btnSua.Padding = new Padding(0, 0, 12, 0);
             btnSua.Size = new Size(100, 35);
@@ -233,7 +233,7 @@
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
-            tableLayoutPanel1.Size = new Size(790, 75);
+            tableLayoutPanel1.Size = new Size(806, 75);
             tableLayoutPanel1.TabIndex = 9;
             // 
             // txtTenKho
@@ -246,13 +246,13 @@
             txtTenKho.errorProvider1 = null;
             txtTenKho.Font = new Font("Calibri", 9F, FontStyle.Regular, GraphicsUnit.Point);
             txtTenKho.Label = "Tên kho xuất";
-            txtTenKho.Location = new Point(215, 5);
+            txtTenKho.Location = new Point(219, 5);
             txtTenKho.Margin = new Padding(2);
             txtTenKho.MinimumSize = new Size(0, 65);
             txtTenKho.Multiline = false;
             txtTenKho.Name = "txtTenKho";
             txtTenKho.ReadOnly = false;
-            txtTenKho.Size = new Size(209, 65);
+            txtTenKho.Size = new Size(213, 65);
             txtTenKho.TabIndex = 1;
             txtTenKho.ValidationType = GUI.Components.Textboxs.TextBoxCustom.eValidationType.SpecialChar;
             // 
@@ -266,13 +266,13 @@
             txtMoTa.errorProvider1 = null;
             txtMoTa.Font = new Font("Calibri", 9F, FontStyle.Regular, GraphicsUnit.Point);
             txtMoTa.Label = "Mô tả";
-            txtMoTa.Location = new Point(428, 5);
+            txtMoTa.Location = new Point(436, 5);
             txtMoTa.Margin = new Padding(2);
             txtMoTa.MinimumSize = new Size(0, 65);
             txtMoTa.Multiline = false;
             txtMoTa.Name = "txtMoTa";
             txtMoTa.ReadOnly = false;
-            txtMoTa.Size = new Size(360, 65);
+            txtMoTa.Size = new Size(368, 65);
             txtMoTa.TabIndex = 2;
             txtMoTa.ValidationType = GUI.Components.Textboxs.TextBoxCustom.eValidationType.SpecialChar;
             // 
@@ -292,7 +292,7 @@
             txtMaKho.Multiline = false;
             txtMaKho.Name = "txtMaKho";
             txtMaKho.ReadOnly = false;
-            txtMaKho.Size = new Size(209, 65);
+            txtMaKho.Size = new Size(213, 65);
             txtMaKho.TabIndex = 0;
             txtMaKho.ValidationType = GUI.Components.Textboxs.TextBoxCustom.eValidationType.SpecialChar;
             // 
@@ -301,7 +301,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightGray;
-            ClientSize = new Size(814, 545);
+            ClientSize = new Size(830, 549);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(panel2);
             Controls.Add(lbTenKhoLog);

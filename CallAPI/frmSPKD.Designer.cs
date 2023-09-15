@@ -58,7 +58,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(814, 50);
+            panel1.Size = new Size(830, 50);
             panel1.TabIndex = 0;
             // 
             // label1
@@ -86,7 +86,7 @@
             btnThem.ForeColor = Color.White;
             btnThem.Image = Properties.Resources.addNew25;
             btnThem.ImageAlign = ContentAlignment.MiddleLeft;
-            btnThem.Location = new Point(491, 6);
+            btnThem.Location = new Point(507, 6);
             btnThem.Name = "btnThem";
             btnThem.Padding = new Padding(0, 0, 5, 0);
             btnThem.Size = new Size(100, 35);
@@ -111,7 +111,7 @@
             btnSua.ForeColor = Color.White;
             btnSua.Image = Properties.Resources.update25;
             btnSua.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSua.Location = new Point(597, 6);
+            btnSua.Location = new Point(613, 6);
             btnSua.Name = "btnSua";
             btnSua.Padding = new Padding(0, 0, 15, 0);
             btnSua.Size = new Size(100, 35);
@@ -136,7 +136,7 @@
             btnXoa.ForeColor = Color.White;
             btnXoa.Image = Properties.Resources.delete25;
             btnXoa.ImageAlign = ContentAlignment.MiddleLeft;
-            btnXoa.Location = new Point(703, 6);
+            btnXoa.Location = new Point(719, 6);
             btnXoa.Name = "btnXoa";
             btnXoa.Padding = new Padding(0, 0, 15, 0);
             btnXoa.Size = new Size(100, 35);
@@ -162,7 +162,7 @@
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
-            tableLayoutPanel1.Size = new Size(790, 70);
+            tableLayoutPanel1.Size = new Size(806, 70);
             tableLayoutPanel1.TabIndex = 1;
             // 
             // checkBox1
@@ -170,7 +170,7 @@
             checkBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             checkBox1.AutoSize = true;
             checkBox1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            checkBox1.Location = new Point(429, 15);
+            checkBox1.Location = new Point(437, 15);
             checkBox1.Margin = new Padding(3, 15, 3, 3);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(118, 52);
@@ -194,7 +194,7 @@
             textBoxCustom1.Multiline = false;
             textBoxCustom1.Name = "textBoxCustom1";
             textBoxCustom1.ReadOnly = false;
-            textBoxCustom1.Size = new Size(209, 65);
+            textBoxCustom1.Size = new Size(213, 65);
             textBoxCustom1.TabIndex = 3;
             textBoxCustom1.ValidationType = Components.Textboxs.TextBoxCustom.eValidationType.SpecialChar;
             // 
@@ -208,13 +208,13 @@
             textBoxCustom2.errorProvider1 = null;
             textBoxCustom2.Font = new Font("Calibri", 9F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxCustom2.Label = "Phạm vi tìm kiếm";
-            textBoxCustom2.Location = new Point(215, 2);
+            textBoxCustom2.Location = new Point(219, 2);
             textBoxCustom2.Margin = new Padding(2);
             textBoxCustom2.MinimumSize = new Size(0, 65);
             textBoxCustom2.Multiline = false;
             textBoxCustom2.Name = "textBoxCustom2";
             textBoxCustom2.ReadOnly = false;
-            textBoxCustom2.Size = new Size(209, 65);
+            textBoxCustom2.Size = new Size(213, 65);
             textBoxCustom2.TabIndex = 4;
             textBoxCustom2.ValidationType = Components.Textboxs.TextBoxCustom.eValidationType.SpecialChar;
             // 
@@ -225,7 +225,7 @@
             panel2.Controls.Add(dgvSpkd);
             panel2.Location = new Point(12, 132);
             panel2.Name = "panel2";
-            panel2.Size = new Size(790, 401);
+            panel2.Size = new Size(806, 405);
             panel2.TabIndex = 2;
             // 
             // dgvSpkd
@@ -240,7 +240,7 @@
             dgvSpkd.ReadOnly = true;
             dgvSpkd.RowTemplate.Height = 25;
             dgvSpkd.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvSpkd.Size = new Size(764, 375);
+            dgvSpkd.Size = new Size(780, 379);
             dgvSpkd.TabIndex = 1;
             // 
             // maKhoXuat
@@ -269,7 +269,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightGray;
-            ClientSize = new Size(814, 545);
+            ClientSize = new Size(830, 549);
             Controls.Add(panel2);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(panel1);

@@ -76,7 +76,7 @@
             // pictureBox2
             // 
             pictureBox2.Image = GUI.Properties.Resources.LogoGonSa;
-            pictureBox2.Location = new Point(109, 2);
+            pictureBox2.Location = new Point(97, 0);
             pictureBox2.Margin = new Padding(4, 3, 4, 3);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(152, 150);
@@ -87,7 +87,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = GUI.Properties.Resources.GONSA_Fly_7K;
-            pictureBox1.Location = new Point(50, 158);
+            pictureBox1.Location = new Point(38, 156);
             pictureBox1.Margin = new Padding(4, 3, 4, 3);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(247, 322);

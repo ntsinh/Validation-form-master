@@ -1,4 +1,6 @@
-﻿namespace GUI
+﻿using System.Runtime.InteropServices;
+
+namespace GUI
 {
     partial class FormMain
     {
@@ -65,6 +67,11 @@
             panel5 = new Panel();
             tblShowForm = new TableLayoutPanel();
             timer1 = new System.Windows.Forms.Timer(components);
+            pnlTitleBar = new Panel();
+            label1 = new Label();
+            btnMinimize = new Button();
+            btnMaximize = new Button();
+            btnClose = new Button();
             pnlSideBar.SuspendLayout();
             pnlDstk.SuspendLayout();
             pnlDsUser.SuspendLayout();
@@ -85,6 +92,7 @@
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlUser.SuspendLayout();
+            pnlTitleBar.SuspendLayout();
             SuspendLayout();
             // 
             // pnlSideBar
@@ -101,9 +109,9 @@
             pnlSideBar.Controls.Add(pnlDsKho);
             pnlSideBar.Controls.Add(panel2);
             pnlSideBar.Dock = DockStyle.Left;
-            pnlSideBar.Location = new Point(0, 0);
+            pnlSideBar.Location = new Point(0, 31);
             pnlSideBar.Name = "pnlSideBar";
-            pnlSideBar.Size = new Size(250, 545);
+            pnlSideBar.Size = new Size(250, 553);
             pnlSideBar.TabIndex = 0;
             // 
             // pnlDstk
@@ -571,11 +579,11 @@
             tblShowForm.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             tblShowForm.ColumnCount = 1;
             tblShowForm.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tblShowForm.Location = new Point(250, 0);
+            tblShowForm.Location = new Point(250, 32);
             tblShowForm.Name = "tblShowForm";
             tblShowForm.RowCount = 1;
             tblShowForm.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tblShowForm.Size = new Size(814, 545);
+            tblShowForm.Size = new Size(825, 547);
             tblShowForm.TabIndex = 1;
             // 
             // timer1
@@ -583,16 +591,97 @@
             timer1.Enabled = true;
             timer1.Tick += timer1_Tick;
             // 
+            // pnlTitleBar
+            // 
+            pnlTitleBar.BackColor = Color.FromArgb(238, 101, 37);
+            pnlTitleBar.Controls.Add(label1);
+            pnlTitleBar.Controls.Add(btnMinimize);
+            pnlTitleBar.Controls.Add(btnMaximize);
+            pnlTitleBar.Controls.Add(btnClose);
+            pnlTitleBar.Dock = DockStyle.Top;
+            pnlTitleBar.Location = new Point(0, 0);
+            pnlTitleBar.Name = "pnlTitleBar";
+            pnlTitleBar.Size = new Size(1080, 31);
+            pnlTitleBar.TabIndex = 2;
+            pnlTitleBar.MouseDoubleClick += pnlTitleBar_MouseDoubleClick;
+            pnlTitleBar.MouseDown += pnlTitleBar_MouseDown;
+            pnlTitleBar.MouseMove += pnlTitleBar_MouseMove;
+            pnlTitleBar.MouseUp += pnlTitleBar_MouseUp;
+            // 
+            // label1
+            // 
+            label1.Dock = DockStyle.Left;
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.White;
+            label1.Image = Properties.Resources.LogoGonSa1;
+            label1.ImageAlign = ContentAlignment.MiddleLeft;
+            label1.Location = new Point(0, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(198, 31);
+            label1.TabIndex = 1;
+            label1.Text = "Data management";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // btnMinimize
+            // 
+            btnMinimize.BackColor = Color.Transparent;
+            btnMinimize.Dock = DockStyle.Right;
+            btnMinimize.FlatAppearance.BorderSize = 0;
+            btnMinimize.FlatStyle = FlatStyle.Flat;
+            btnMinimize.Image = Properties.Resources.minus;
+            btnMinimize.Location = new Point(987, 0);
+            btnMinimize.Name = "btnMinimize";
+            btnMinimize.Size = new Size(31, 31);
+            btnMinimize.TabIndex = 0;
+            btnMinimize.UseVisualStyleBackColor = false;
+            btnMinimize.Click += btnMinimize_Click;
+            btnMinimize.MouseEnter += btnMinimize_MouseEnter;
+            btnMinimize.MouseLeave += btnMinimize_MouseLeave;
+            // 
+            // btnMaximize
+            // 
+            btnMaximize.BackColor = Color.Transparent;
+            btnMaximize.Dock = DockStyle.Right;
+            btnMaximize.FlatAppearance.BorderSize = 0;
+            btnMaximize.FlatStyle = FlatStyle.Flat;
+            btnMaximize.Image = Properties.Resources.maximize;
+            btnMaximize.Location = new Point(1018, 0);
+            btnMaximize.Name = "btnMaximize";
+            btnMaximize.Size = new Size(31, 31);
+            btnMaximize.TabIndex = 0;
+            btnMaximize.UseVisualStyleBackColor = false;
+            btnMaximize.Click += btnMaximize_Click;
+            btnMaximize.MouseEnter += btnMaximize_MouseEnter;
+            btnMaximize.MouseLeave += btnMaximize_MouseLeave;
+            // 
+            // btnClose
+            // 
+            btnClose.BackColor = Color.Transparent;
+            btnClose.Dock = DockStyle.Right;
+            btnClose.FlatAppearance.BorderSize = 0;
+            btnClose.FlatStyle = FlatStyle.Flat;
+            btnClose.Image = Properties.Resources.close;
+            btnClose.Location = new Point(1049, 0);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new Size(31, 31);
+            btnClose.TabIndex = 0;
+            btnClose.UseVisualStyleBackColor = false;
+            btnClose.Click += btnClose_Click;
+            btnClose.MouseEnter += btnClose_MouseEnter;
+            btnClose.MouseLeave += btnClose_MouseLeave;
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1064, 545);
+            ClientSize = new Size(1080, 584);
             Controls.Add(tblShowForm);
             Controls.Add(pnlSideBar);
+            Controls.Add(pnlTitleBar);
+            FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MdiChildrenMinimizedAnchorBottom = false;
-            MinimumSize = new Size(1080, 584);
+            MinimumSize = new Size(800, 400);
             Name = "FormMain";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Data management";
@@ -618,11 +707,11 @@
             panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             pnlUser.ResumeLayout(false);
+            pnlTitleBar.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-
         private Panel pnlSideBar;
         private Button btnDsKho;
         private Panel panel2;
@@ -658,5 +747,10 @@
         private Panel pnlUser;
         private Label lbUser;
         private System.Windows.Forms.Timer timer1;
+        private Panel pnlTitleBar;
+        private Label label1;
+        private Button btnMinimize;
+        private Button btnMaximize;
+        private Button btnClose;
     }
 }
