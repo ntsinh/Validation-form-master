@@ -28,22 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             panel1 = new Panel();
             label1 = new Label();
+            btnImport = new CustomButton();
+            btnExport = new CustomButton();
             btnThem = new CustomButton();
             btnSua = new CustomButton();
             btnXoa = new CustomButton();
             tableLayoutPanel1 = new TableLayoutPanel();
-            checkBox1 = new CheckBox();
-            textBoxCustom1 = new Components.Textboxs.TextBoxCustom();
-            textBoxCustom2 = new Components.Textboxs.TextBoxCustom();
+            cbKinhdoanh = new CheckBox();
+            tbSearchBox = new Components.Textboxs.TextBoxCustom();
+            tableLayoutPanel2 = new TableLayoutPanel();
+            label3 = new Label();
+            cbbPhamvi = new ComboBox();
+            dsspBindingSource = new BindingSource(components);
             panel2 = new Panel();
             dgvSpkd = new DataGridView();
-            maKhoXuat = new DataGridViewTextBoxColumn();
-            tenKhoXuat = new DataGridViewTextBoxColumn();
-            moTa = new DataGridViewTextBoxColumn();
+            label2 = new Label();
             panel1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
+            tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dsspBindingSource).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvSpkd).BeginInit();
             SuspendLayout();
@@ -52,6 +58,8 @@
             // 
             panel1.BackColor = Color.White;
             panel1.Controls.Add(label1);
+            panel1.Controls.Add(btnImport);
+            panel1.Controls.Add(btnExport);
             panel1.Controls.Add(btnThem);
             panel1.Controls.Add(btnSua);
             panel1.Controls.Add(btnXoa);
@@ -71,6 +79,52 @@
             label1.Size = new Size(206, 25);
             label1.TabIndex = 1;
             label1.Text = "Sản phẩm kinh doanh";
+            // 
+            // btnImport
+            // 
+            btnImport.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnImport.BackColor = Color.Transparent;
+            btnImport.BackgroundColor = Color.Transparent;
+            btnImport.BorderColor = Color.Orange;
+            btnImport.BorderRadius = 0;
+            btnImport.BorderSize = 0;
+            btnImport.FlatAppearance.BorderSize = 0;
+            btnImport.FlatStyle = FlatStyle.Flat;
+            btnImport.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnImport.ForeColor = Color.White;
+            btnImport.Image = Properties.Resources.import;
+            btnImport.ImageAlign = ContentAlignment.MiddleLeft;
+            btnImport.Location = new Point(380, 7);
+            btnImport.Name = "btnImport";
+            btnImport.Size = new Size(40, 35);
+            btnImport.TabIndex = 0;
+            btnImport.TextAlign = ContentAlignment.MiddleRight;
+            btnImport.TextColor = Color.White;
+            btnImport.UseVisualStyleBackColor = false;
+            btnImport.Click += btnImport_Click;
+            // 
+            // btnExport
+            // 
+            btnExport.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnExport.BackColor = Color.Transparent;
+            btnExport.BackgroundColor = Color.Transparent;
+            btnExport.BorderColor = Color.Orange;
+            btnExport.BorderRadius = 0;
+            btnExport.BorderSize = 0;
+            btnExport.FlatAppearance.BorderSize = 0;
+            btnExport.FlatStyle = FlatStyle.Flat;
+            btnExport.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnExport.ForeColor = Color.White;
+            btnExport.Image = Properties.Resources.export;
+            btnExport.ImageAlign = ContentAlignment.MiddleLeft;
+            btnExport.Location = new Point(426, 7);
+            btnExport.Name = "btnExport";
+            btnExport.Size = new Size(40, 35);
+            btnExport.TabIndex = 0;
+            btnExport.TextAlign = ContentAlignment.MiddleRight;
+            btnExport.TextColor = Color.White;
+            btnExport.UseVisualStyleBackColor = false;
+            btnExport.Click += btnExport_Click;
             // 
             // btnThem
             // 
@@ -95,7 +149,6 @@
             btnThem.TextAlign = ContentAlignment.MiddleRight;
             btnThem.TextColor = Color.White;
             btnThem.UseVisualStyleBackColor = false;
-            btnThem.Click += customButton1_Click;
             // 
             // btnSua
             // 
@@ -120,7 +173,6 @@
             btnSua.TextAlign = ContentAlignment.MiddleRight;
             btnSua.TextColor = Color.White;
             btnSua.UseVisualStyleBackColor = false;
-            btnSua.Click += customButton1_Click;
             // 
             // btnXoa
             // 
@@ -145,7 +197,6 @@
             btnXoa.TextAlign = ContentAlignment.MiddleRight;
             btnXoa.TextColor = Color.White;
             btnXoa.UseVisualStyleBackColor = false;
-            btnXoa.Click += customButton1_Click;
             // 
             // tableLayoutPanel1
             // 
@@ -155,9 +206,9 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 27F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 27F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 46F));
-            tableLayoutPanel1.Controls.Add(checkBox1, 2, 0);
-            tableLayoutPanel1.Controls.Add(textBoxCustom1, 0, 0);
-            tableLayoutPanel1.Controls.Add(textBoxCustom2, 1, 0);
+            tableLayoutPanel1.Controls.Add(cbKinhdoanh, 2, 0);
+            tableLayoutPanel1.Controls.Add(tbSearchBox, 0, 0);
+            tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 1, 0);
             tableLayoutPanel1.Location = new Point(12, 55);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
@@ -165,58 +216,85 @@
             tableLayoutPanel1.Size = new Size(806, 70);
             tableLayoutPanel1.TabIndex = 1;
             // 
-            // checkBox1
+            // cbKinhdoanh
             // 
-            checkBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            checkBox1.AutoSize = true;
-            checkBox1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            checkBox1.Location = new Point(437, 15);
-            checkBox1.Margin = new Padding(3, 15, 3, 3);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(118, 52);
-            checkBox1.TabIndex = 2;
-            checkBox1.Text = "Đang kinh doanh";
-            checkBox1.UseVisualStyleBackColor = true;
+            cbKinhdoanh.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            cbKinhdoanh.AutoSize = true;
+            cbKinhdoanh.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            cbKinhdoanh.Location = new Point(444, 15);
+            cbKinhdoanh.Margin = new Padding(10, 15, 3, 3);
+            cbKinhdoanh.Name = "cbKinhdoanh";
+            cbKinhdoanh.Size = new Size(118, 52);
+            cbKinhdoanh.TabIndex = 2;
+            cbKinhdoanh.Text = "Đang kinh doanh";
+            cbKinhdoanh.UseVisualStyleBackColor = true;
+            cbKinhdoanh.CheckedChanged += cbKinhdoanh_CheckedChanged;
             // 
-            // textBoxCustom1
+            // tbSearchBox
             // 
-            textBoxCustom1.AllowNull = true;
-            textBoxCustom1.AllowWhiteSpace = true;
-            textBoxCustom1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            textBoxCustom1.BackColor = Color.White;
-            textBoxCustom1.Error = "";
-            textBoxCustom1.errorProvider1 = null;
-            textBoxCustom1.Font = new Font("Calibri", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxCustom1.Label = "Nội dung tìm kiếm";
-            textBoxCustom1.Location = new Point(2, 2);
-            textBoxCustom1.Margin = new Padding(2);
-            textBoxCustom1.MinimumSize = new Size(0, 65);
-            textBoxCustom1.Multiline = false;
-            textBoxCustom1.Name = "textBoxCustom1";
-            textBoxCustom1.ReadOnly = false;
-            textBoxCustom1.Size = new Size(213, 65);
-            textBoxCustom1.TabIndex = 3;
-            textBoxCustom1.ValidationType = Components.Textboxs.TextBoxCustom.eValidationType.SpecialChar;
+            tbSearchBox.AllowNull = true;
+            tbSearchBox.AllowWhiteSpace = true;
+            tbSearchBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            tbSearchBox.BackColor = Color.White;
+            tbSearchBox.Error = "";
+            tbSearchBox.errorProvider1 = null;
+            tbSearchBox.Font = new Font("Calibri", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tbSearchBox.Label = "Nội dung tìm kiếm";
+            tbSearchBox.Location = new Point(2, 2);
+            tbSearchBox.Margin = new Padding(2);
+            tbSearchBox.MinimumSize = new Size(0, 65);
+            tbSearchBox.Multiline = false;
+            tbSearchBox.Name = "tbSearchBox";
+            tbSearchBox.ReadOnly = false;
+            tbSearchBox.Size = new Size(213, 65);
+            tbSearchBox.TabIndex = 3;
+            tbSearchBox.ValidationType = Components.Textboxs.TextBoxCustom.eValidationType.SpecialChar;
+            tbSearchBox.UCTextChanged += textBoxCustom1_UCTextChanged;
             // 
-            // textBoxCustom2
+            // tableLayoutPanel2
             // 
-            textBoxCustom2.AllowNull = true;
-            textBoxCustom2.AllowWhiteSpace = true;
-            textBoxCustom2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            textBoxCustom2.BackColor = Color.White;
-            textBoxCustom2.Error = "";
-            textBoxCustom2.errorProvider1 = null;
-            textBoxCustom2.Font = new Font("Calibri", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxCustom2.Label = "Phạm vi tìm kiếm";
-            textBoxCustom2.Location = new Point(219, 2);
-            textBoxCustom2.Margin = new Padding(2);
-            textBoxCustom2.MinimumSize = new Size(0, 65);
-            textBoxCustom2.Multiline = false;
-            textBoxCustom2.Name = "textBoxCustom2";
-            textBoxCustom2.ReadOnly = false;
-            textBoxCustom2.Size = new Size(213, 65);
-            textBoxCustom2.TabIndex = 4;
-            textBoxCustom2.ValidationType = Components.Textboxs.TextBoxCustom.eValidationType.SpecialChar;
+            tableLayoutPanel2.ColumnCount = 1;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel2.Controls.Add(label3, 0, 0);
+            tableLayoutPanel2.Controls.Add(cbbPhamvi, 0, 1);
+            tableLayoutPanel2.Location = new Point(220, 3);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 3;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 40F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 35F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel2.Size = new Size(211, 64);
+            tableLayoutPanel2.TabIndex = 4;
+            // 
+            // label3
+            // 
+            label3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.Location = new Point(10, 5);
+            label3.Margin = new Padding(10, 0, 0, 5);
+            label3.Name = "label3";
+            label3.Size = new Size(104, 15);
+            label3.TabIndex = 0;
+            label3.Text = "Phạm vi tìm kiếm";
+            // 
+            // cbbPhamvi
+            // 
+            cbbPhamvi.Dock = DockStyle.Fill;
+            cbbPhamvi.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbbPhamvi.FormattingEnabled = true;
+            cbbPhamvi.Items.AddRange(new object[] { "Tất cả", "Mã Sp", "Tên Sp", "Số lượng", "Mô tả" });
+            cbbPhamvi.Location = new Point(10, 25);
+            cbbPhamvi.Margin = new Padding(10, 0, 10, 0);
+            cbbPhamvi.Name = "cbbPhamvi";
+            cbbPhamvi.Size = new Size(191, 23);
+            cbbPhamvi.TabIndex = 1;
+            cbbPhamvi.Tag = "";
+            cbbPhamvi.SelectedIndexChanged += cbbPhamvi_SelectedIndexChanged;
+            // 
+            // dsspBindingSource
+            // 
+            dsspBindingSource.DataSource = typeof(DTO.Dssp);
             // 
             // panel2
             // 
@@ -234,7 +312,6 @@
             dgvSpkd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvSpkd.BackgroundColor = Color.Gainsboro;
             dgvSpkd.BorderStyle = BorderStyle.None;
-            dgvSpkd.Columns.AddRange(new DataGridViewColumn[] { maKhoXuat, tenKhoXuat, moTa });
             dgvSpkd.Location = new Point(13, 14);
             dgvSpkd.Name = "dgvSpkd";
             dgvSpkd.ReadOnly = true;
@@ -243,26 +320,17 @@
             dgvSpkd.Size = new Size(780, 379);
             dgvSpkd.TabIndex = 1;
             // 
-            // maKhoXuat
+            // label2
             // 
-            maKhoXuat.DataPropertyName = "maKhoXuat";
-            maKhoXuat.HeaderText = "Mã Kho Xuất";
-            maKhoXuat.Name = "maKhoXuat";
-            maKhoXuat.ReadOnly = true;
-            // 
-            // tenKhoXuat
-            // 
-            tenKhoXuat.DataPropertyName = "tenKhoXuat";
-            tenKhoXuat.HeaderText = "Tên Kho Xuất";
-            tenKhoXuat.Name = "tenKhoXuat";
-            tenKhoXuat.ReadOnly = true;
-            // 
-            // moTa
-            // 
-            moTa.DataPropertyName = "moTa";
-            moTa.HeaderText = "Mô Tả";
-            moTa.Name = "moTa";
-            moTa.ReadOnly = true;
+            label2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label2.AutoSize = true;
+            label2.Location = new Point(51, 0);
+            label2.Margin = new Padding(10, 0, 3, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(38, 15);
+            label2.TabIndex = 0;
+            label2.Text = "label2";
+            label2.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // frmSPKD
             // 
@@ -281,6 +349,9 @@
             panel1.PerformLayout();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
+            tableLayoutPanel2.ResumeLayout(false);
+            tableLayoutPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dsspBindingSource).EndInit();
             panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvSpkd).EndInit();
             ResumeLayout(false);
@@ -296,11 +367,14 @@
         private TableLayoutPanel tableLayoutPanel1;
         private Panel panel2;
         private DataGridView dgvSpkd;
-        private DataGridViewTextBoxColumn maKhoXuat;
-        private DataGridViewTextBoxColumn tenKhoXuat;
-        private DataGridViewTextBoxColumn moTa;
-        private CheckBox checkBox1;
-        private Components.Textboxs.TextBoxCustom textBoxCustom1;
-        private Components.Textboxs.TextBoxCustom textBoxCustom2;
+        private CheckBox cbKinhdoanh;
+        private Components.Textboxs.TextBoxCustom tbSearchBox;
+        private CustomButton btnExport;
+        private CustomButton btnImport;
+        private TableLayoutPanel tableLayoutPanel2;
+        private Label label2;
+        private Label label3;
+        private ComboBox cbbPhamvi;
+        private BindingSource dsspBindingSource;
     }
 }

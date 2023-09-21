@@ -6,12 +6,15 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="EPPlus" Version="6.2.9" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
+    <PackageReference Include="System.Data.OleDb" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>

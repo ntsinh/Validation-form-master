@@ -24,5 +24,18 @@ namespace BLL
             List<User> data = apiDal.getJson<User>();
             return data;
         }
+        private ApiBLL _apiBLL;
+
+        //public ApiBLL()
+        //{
+        //    _apiBLL = new ApiBLL();
+        //}
+
+        public List<Dssp> ReadExcelFileForGUI(string filePath)
+        {
+            ApiDAL apiDal = new ApiDAL();
+            //object data = apiDal.ReadExcelFile(filePath);
+            return apiDal.ReadExcelFile(filePath);
+        }
     }
 }

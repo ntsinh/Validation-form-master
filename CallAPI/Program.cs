@@ -1,6 +1,8 @@
 using static System.Formats.Asn1.AsnWriter;
 using System.Security.Cryptography;
 using System.Text;
+using Newtonsoft.Json;
+using DTO;
 
 namespace CallAPI
 {
@@ -27,6 +29,7 @@ namespace CallAPI
             byte[] hash = sha.ComputeHash(bytPassword);
             return Convert.ToBase64String(hash);
         }
+        
 
     }
 }

@@ -583,7 +583,7 @@ namespace GUI
             tblShowForm.Name = "tblShowForm";
             tblShowForm.RowCount = 1;
             tblShowForm.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tblShowForm.Size = new Size(825, 547);
+            tblShowForm.Size = new Size(830, 547);
             tblShowForm.TabIndex = 1;
             // 
             // timer1
@@ -681,7 +681,7 @@ namespace GUI
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MdiChildrenMinimizedAnchorBottom = false;
-            MinimumSize = new Size(800, 400);
+            MinimumSize = new Size(950, 450);
             Name = "FormMain";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Data management";

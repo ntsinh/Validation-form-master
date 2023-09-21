@@ -118,11 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="maximize" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\maximize.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="restore-down" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\restore-down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="LogoGonSa" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LogoGonSa.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="update" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\update.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="UpArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\UpArrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -133,20 +136,14 @@
   <data name="close_eye" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\close-eye.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\minus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="restore-down" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\restore-down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="delete25" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\delete25.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="maximize" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\maximize.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="addNew25" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\addNew25.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -157,11 +154,11 @@
   <data name="user1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\user12.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="close" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Product" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Product.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Local" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Local.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -169,11 +166,14 @@
   <data name="update25" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\update25.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="update" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\update.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="delete25" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\delete25.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="tomScream" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tomScream.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Product" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Product.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Storal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Storal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -181,13 +181,19 @@
   <data name="open_eye" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\open-eye.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="LogoGonSa1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LogoGonSa.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="addNew" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\addNew.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="GONSA_Fly_7K" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\GONSA_Fly_7K.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LogoGonSa1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LogoGonSa.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="export" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\export.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="import" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\import.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

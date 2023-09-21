@@ -293,7 +293,7 @@ namespace GUI
             }
         }
         #endregion
-        #region
+        #region Resize form
         private const int cGrip = 16;      // Grip size
         private const int cCaption = 32;   // Caption bar height;
         protected override void WndProc(ref Message m)
@@ -316,7 +316,6 @@ namespace GUI
             base.WndProc(ref m);
         }
         #endregion
-
 
     }
 }

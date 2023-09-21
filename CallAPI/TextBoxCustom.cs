@@ -223,7 +223,7 @@ namespace GUI.Components.Textboxs
             }
         }
 
-        private async void txt_TextChanged(object sender, EventArgs e)
+        public async void txt_TextChanged(object sender, EventArgs e)
         {
             if (!isEnableTextChanged)
             {

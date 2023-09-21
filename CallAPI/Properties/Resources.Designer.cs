@@ -133,9 +133,29 @@ namespace GUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap export {
+            get {
+                object obj = ResourceManager.GetObject("export", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap GONSA_Fly_7K {
             get {
                 object obj = ResourceManager.GetObject("GONSA_Fly_7K", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap import {
+            get {
+                object obj = ResourceManager.GetObject("import", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

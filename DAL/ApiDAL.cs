@@ -1,7 +1,10 @@
 ﻿using DTO;
 using Newtonsoft.Json;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.OleDb;
 using System.Linq;
 using System.Net;
 using System.Runtime.Serialization.Json;
@@ -31,6 +34,38 @@ namespace DAL
                 return data;
             }
             return null;
+        }
+        public List<Dssp> ReadExcelFile(string filePath)
+        {
+            List<Dssp> dsspList = new List<Dssp>();
+            string con = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties='Excel 8.0;HDR={1}'";
+            con = string.Format(con, filePath, "yes");
+            using (OleDbConnection connection = new OleDbConnection(con))
+            {
+                connection.Open();
+                string query = "SELECT * FROM [Sheet1$]";
+                //DataTable dtexcel = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+                //string excelsheet = dtexcel.Rows[0]["TABLE_NAME"].ToString();
+                //"Select * from [" + excelsheet + "]"
+                using (OleDbCommand command = new OleDbCommand(query, connection))
+                {
+                    using (OleDbDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            dsspList.Add(new Dssp
+                            {
+                                MaSp = reader.GetValue(0).ToString(),
+                                TenSp = reader.GetValue(1).ToString(),
+                                SoLuong = int.Parse(reader.GetValue(2).ToString()),
+                                MoTa = reader.GetValue(3).ToString(),
+                                TinhTrang = reader.GetValue(4).ToString()
+                            });
+                        }
+                    }
+                }
+            }
+            return dsspList;
         }
     }
 }
