@@ -15,6 +15,7 @@ using OfficeOpenXml;
 using BLL;
 using Newtonsoft.Json;
 using LicenseContext = OfficeOpenXml.LicenseContext;
+using GUI.Components.Textboxs;
 
 namespace GUI
 {
@@ -25,6 +26,8 @@ namespace GUI
         {
             InitializeComponent();
             cbbPhamvi.Text = "Tất cả";
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
         }
         int cbbFilter;
         private void frmSPKD_Load(object sender, EventArgs e)
@@ -129,7 +132,7 @@ namespace GUI
         private void textBoxCustom1_UCTextChanged(object sender, EventArgs e)
         {
 
-            if (tbSearchBox.Text != null)
+            if (tbSearchBox.Text != "")
             {
                 //check();
                 FilterData();
@@ -313,5 +316,166 @@ namespace GUI
                 FilterData();
             }
         }
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            filerPanelState();
+        }
+        private void filerPanelState()
+        {
+            if (pnlFilter.Visible == false)
+            {
+                pnlFilter.Visible = true;
+                btnFilter.BackColor = Color.Gainsboro;
+            }
+            else
+            {
+                pnlFilter.Visible = false;
+                btnFilter.BackColor = Color.Transparent;
+            }
+        }
+        const int WM_PARENTNOTIFY = 0x210;
+        const int WM_LBUTTONDOWN = 0x201;
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == WM_LBUTTONDOWN || (m.Msg == WM_PARENTNOTIFY && (int)m.WParam == WM_LBUTTONDOWN))
+            {
+                if (pnlFilter.Visible == true)
+                {
+                    if (!pnlFilter.ClientRectangle.Contains(pnlFilter.PointToClient(Cursor.Position)) && !btnFilter.ClientRectangle.Contains(btnFilter.PointToClient(Cursor.Position)))
+                    {
+                        filerPanelState();
+                    }
+                }
+            }
+            base.WndProc(ref m);
+        }
+
+        private void btnClearFilter_Click(object sender, EventArgs e)
+        {
+            tbSearchBox.Text = "";
+            cbbPhamvi.Text = "Tất cả";
+            cbKinhdoanh.CheckState = CheckState.Unchecked;
+            FilterData();
+        }
+        private void resetData()
+        {
+            dgvSpkd.DataSource = null;
+        }
+        private void clear()
+        {
+            tbMaSp.Text = null;
+            tbTenSp.Text = null;
+            tbSoluong.Text = null;
+            tbMota.Text = null;
+            cbbTinhTrang.SelectedIndex = -1;
+            tbMaSp.ErrorLable(false);
+            tbTenSp.ErrorLable(false);
+            tbSoluong.ErrorLable(false);
+        }
+        private void btnThem_Click(object sender, EventArgs e)
+        {
+            if (dgvSpkd.RowCount > 0)
+            {
+                //tbMaSp.ErrorLable(true);
+                //tbTenSp.ErrorLable(true);
+                var maSp = listDssp.FirstOrDefault(dssp => dssp.MaSp == tbMaSp.Text);
+                var tenSp = listDssp.FirstOrDefault(dssp => dssp.TenSp == tbTenSp.Text);
+                if (maSp != null)
+                {
+                    tbMaSp.Focus();
+                    tbMaSp.Error = "Mã sản phẩm đã tồn tại";
+                    return;
+                }
+                else if (tenSp != null)
+                {
+                    tbTenSp.Focus();
+                    tbTenSp.Error = "Tên sản phẩm đã tồn tại";
+                    return;
+                }
+                else
+                {
+                    Dssp sp = new Dssp();
+                    sp.MaSp = tbMaSp.Text;
+                    sp.TenSp = tbTenSp.Text;
+                    if (tbMaSp.Text == "" || tbTenSp.Text == "")
+                    {
+                        tbMaSp.ErrorLable(true);
+                        tbTenSp.ErrorLable(true);
+                    }
+                    if (tbSoluong.Text != "" && int.Parse(tbSoluong.Text.ToString()) >= 0)
+                    {
+                        sp.SoLuong = int.Parse(tbSoluong.Text.ToString());
+                    }
+                    else
+                    {
+                        tbSoluong.ErrorLable(true);
+                        tbSoluong.Error = "Ít nhất bằng 0";
+                    }
+                    sp.MoTa = tbMota.Text;
+                    if (cbbTinhTrang.Text != "")
+                    {
+                        lbError.Text = "";
+                        lbError.Visible = false;
+                        sp.TinhTrang = cbbTinhTrang.SelectedItem.ToString();
+                    }
+                    else
+                    {
+                        cbbTinhTrang.Focus();
+                        lbError.Visible = true;
+                        lbError.Text = "Chưa được chọn";
+                    }
+                    if (tbMaSp.Error == "" && tbTenSp.Error == "" && tbSoluong.Error == "" && lbError.Text == "")
+                    {
+                        listDssp.Add(sp);
+                        resetData();
+                        dgvSpkd.DataSource = listDssp;
+                        clear();
+                    }
+                    else
+                    {
+                        tbMaSp.ErrorLable(true);
+                        tbTenSp.ErrorLable(true);
+                        tbSoluong.ErrorLable(true);
+                        MessageBox.Show("Vui lòng nhập đúng các trường");
+                    }
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Chưa load data");
+            }
+
+        }
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            if (dgvSpkd.RowCount > 0)
+            {
+
+            }
+            else
+            {
+                MessageBox.Show("Chưa load data");
+            }
+        }
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            if (dgvSpkd.RowCount > 0)
+            {
+                var sanPham = listDssp.FirstOrDefault(dssp => dssp.MaSp == tbMaSp.Text);
+                if (sanPham != null)
+                {
+                    listDssp.Remove(sanPham);
+                    resetData();
+                    dgvSpkd.DataSource = listDssp;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Chưa load data");
+            }
+        }
+
     }
 }

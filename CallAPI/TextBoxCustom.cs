@@ -47,6 +47,7 @@ namespace GUI.Components.Textboxs
                 await Task.Delay(5000);
                 lblError.Hide();
                 errorProvider.SetError(txt, null);
+                //return;
             }
             else
             {
@@ -113,7 +114,6 @@ namespace GUI.Components.Textboxs
                 errorProvider.SetError(txt, value);
             }
         }
-
         [Category(CategoryDisplay)]
         public bool AllowNull { get; set; } = true;
 

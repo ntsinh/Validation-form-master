@@ -47,20 +47,20 @@
             password = new DataGridViewTextBoxColumn();
             email = new DataGridViewTextBoxColumn();
             Rule = new DataGridViewTextBoxColumn();
+            tableLayoutPanel3 = new TableLayoutPanel();
             panel1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUser).BeginInit();
+            tableLayoutPanel3.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.White;
+            panel1.Controls.Add(tableLayoutPanel3);
             panel1.Controls.Add(label4);
-            panel1.Controls.Add(btnXoa);
-            panel1.Controls.Add(btnThem);
-            panel1.Controls.Add(btnSua);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
@@ -80,22 +80,22 @@
             // 
             // btnXoa
             // 
-            btnXoa.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnXoa.BackColor = Color.Red;
-            btnXoa.BackgroundColor = Color.Red;
+            btnXoa.BackColor = Color.FromArgb(244, 67, 54);
+            btnXoa.BackgroundColor = Color.FromArgb(244, 67, 54);
             btnXoa.BorderColor = Color.Red;
             btnXoa.BorderRadius = 5;
             btnXoa.BorderSize = 0;
+            btnXoa.Dock = DockStyle.Fill;
             btnXoa.FlatAppearance.BorderSize = 0;
             btnXoa.FlatStyle = FlatStyle.Flat;
             btnXoa.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnXoa.ForeColor = Color.White;
             btnXoa.Image = Properties.Resources.delete25;
             btnXoa.ImageAlign = ContentAlignment.MiddleLeft;
-            btnXoa.Location = new Point(718, 8);
+            btnXoa.Location = new Point(211, 8);
             btnXoa.Name = "btnXoa";
             btnXoa.Padding = new Padding(0, 0, 12, 0);
-            btnXoa.Size = new Size(100, 35);
+            btnXoa.Size = new Size(99, 34);
             btnXoa.TabIndex = 11;
             btnXoa.TabStop = false;
             btnXoa.Text = "Xóa";
@@ -106,23 +106,23 @@
             // 
             // btnThem
             // 
-            btnThem.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnThem.BackColor = Color.FromArgb(238, 101, 37);
             btnThem.BackgroundColor = Color.FromArgb(238, 101, 37);
             btnThem.BackgroundImageLayout = ImageLayout.None;
             btnThem.BorderColor = Color.Orange;
             btnThem.BorderRadius = 5;
             btnThem.BorderSize = 0;
+            btnThem.Dock = DockStyle.Fill;
             btnThem.FlatAppearance.BorderSize = 0;
             btnThem.FlatStyle = FlatStyle.Flat;
             btnThem.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnThem.ForeColor = Color.White;
             btnThem.Image = Properties.Resources.addNew25;
             btnThem.ImageAlign = ContentAlignment.MiddleLeft;
-            btnThem.Location = new Point(506, 8);
+            btnThem.Location = new Point(3, 8);
             btnThem.Name = "btnThem";
             btnThem.Padding = new Padding(0, 0, 5, 0);
-            btnThem.Size = new Size(100, 35);
+            btnThem.Size = new Size(98, 34);
             btnThem.TabIndex = 9;
             btnThem.Text = "Thêm";
             btnThem.TextAlign = ContentAlignment.MiddleRight;
@@ -132,22 +132,22 @@
             // 
             // btnSua
             // 
-            btnSua.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnSua.BackColor = Color.FromArgb(0, 192, 0);
-            btnSua.BackgroundColor = Color.FromArgb(0, 192, 0);
+            btnSua.BackColor = Color.FromArgb(89, 206, 143);
+            btnSua.BackgroundColor = Color.FromArgb(89, 206, 143);
             btnSua.BorderColor = Color.Orange;
             btnSua.BorderRadius = 5;
             btnSua.BorderSize = 0;
+            btnSua.Dock = DockStyle.Fill;
             btnSua.FlatAppearance.BorderSize = 0;
             btnSua.FlatStyle = FlatStyle.Flat;
             btnSua.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnSua.ForeColor = Color.White;
             btnSua.Image = Properties.Resources.update25;
             btnSua.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSua.Location = new Point(612, 8);
+            btnSua.Location = new Point(107, 8);
             btnSua.Name = "btnSua";
             btnSua.Padding = new Padding(0, 0, 12, 0);
-            btnSua.Size = new Size(100, 35);
+            btnSua.Size = new Size(98, 34);
             btnSua.TabIndex = 10;
             btnSua.Text = "Sửa";
             btnSua.TextAlign = ContentAlignment.MiddleRight;
@@ -346,6 +346,24 @@
             Rule.Name = "Rule";
             Rule.ReadOnly = true;
             // 
+            // tableLayoutPanel3
+            // 
+            tableLayoutPanel3.ColumnCount = 3;
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel3.Controls.Add(btnXoa, 2, 0);
+            tableLayoutPanel3.Controls.Add(btnSua, 1, 0);
+            tableLayoutPanel3.Controls.Add(btnThem, 0, 0);
+            tableLayoutPanel3.Dock = DockStyle.Right;
+            tableLayoutPanel3.Location = new Point(507, 0);
+            tableLayoutPanel3.Name = "tableLayoutPanel3";
+            tableLayoutPanel3.Padding = new Padding(0, 5, 10, 5);
+            tableLayoutPanel3.RowCount = 1;
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel3.Size = new Size(323, 50);
+            tableLayoutPanel3.TabIndex = 13;
+            // 
             // UserForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -366,6 +384,7 @@
             tableLayoutPanel2.PerformLayout();
             panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvUser).EndInit();
+            tableLayoutPanel3.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -390,5 +409,6 @@
         private DataGridViewTextBoxColumn password;
         private DataGridViewTextBoxColumn email;
         private DataGridViewTextBoxColumn Rule;
+        private TableLayoutPanel tableLayoutPanel3;
     }
 }

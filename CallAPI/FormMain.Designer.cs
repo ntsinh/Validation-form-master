@@ -33,6 +33,8 @@ namespace GUI
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             pnlSideBar = new Panel();
+            pnlLogout = new Panel();
+            btnLogout = new Button();
             pnlDstk = new Panel();
             button9 = new Button();
             btnDsUser = new Button();
@@ -60,19 +62,22 @@ namespace GUI
             pnlDsKho = new Panel();
             btnDsKho = new Button();
             pbArrowDsKho = new PictureBox();
-            panel2 = new Panel();
-            pictureBox1 = new PictureBox();
-            pnlUser = new Panel();
+            pnlLogo = new Panel();
+            pbLogo = new PictureBox();
+            pnlMenu = new Panel();
             lbUser = new Label();
+            btnMenu = new Button();
             panel5 = new Panel();
-            tblShowForm = new TableLayoutPanel();
             timer1 = new System.Windows.Forms.Timer(components);
             pnlTitleBar = new Panel();
             label1 = new Label();
             btnMinimize = new Button();
             btnMaximize = new Button();
             btnClose = new Button();
+            CollapseTimer = new System.Windows.Forms.Timer(components);
+            pnlShowForm = new Panel();
             pnlSideBar.SuspendLayout();
+            pnlLogout.SuspendLayout();
             pnlDstk.SuspendLayout();
             pnlDsUser.SuspendLayout();
             btnUser.SuspendLayout();
@@ -89,9 +94,9 @@ namespace GUI
             pnlDsKho.SuspendLayout();
             btnDsKho.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbArrowDsKho).BeginInit();
-            panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            pnlUser.SuspendLayout();
+            pnlLogo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbLogo).BeginInit();
+            pnlMenu.SuspendLayout();
             pnlTitleBar.SuspendLayout();
             SuspendLayout();
             // 
@@ -99,6 +104,7 @@ namespace GUI
             // 
             pnlSideBar.AutoScroll = true;
             pnlSideBar.BackColor = Color.FromArgb(64, 64, 64);
+            pnlSideBar.Controls.Add(pnlLogout);
             pnlSideBar.Controls.Add(pnlDstk);
             pnlSideBar.Controls.Add(pnlDsUser);
             pnlSideBar.Controls.Add(pnlSubmenuDonHang);
@@ -107,21 +113,53 @@ namespace GUI
             pnlSideBar.Controls.Add(pnlDssp);
             pnlSideBar.Controls.Add(pnlSubMenuKho);
             pnlSideBar.Controls.Add(pnlDsKho);
-            pnlSideBar.Controls.Add(panel2);
+            pnlSideBar.Controls.Add(pnlLogo);
+            pnlSideBar.Controls.Add(pnlMenu);
             pnlSideBar.Dock = DockStyle.Left;
             pnlSideBar.Location = new Point(0, 31);
+            pnlSideBar.MaximumSize = new Size(250, 0);
+            pnlSideBar.MinimumSize = new Size(45, 0);
             pnlSideBar.Name = "pnlSideBar";
-            pnlSideBar.Size = new Size(250, 553);
-            pnlSideBar.TabIndex = 0;
+            pnlSideBar.Size = new Size(250, 548);
+            pnlSideBar.TabIndex = 5;
+            // 
+            // pnlLogout
+            // 
+            pnlLogout.BackColor = Color.Transparent;
+            pnlLogout.Controls.Add(btnLogout);
+            pnlLogout.Dock = DockStyle.Bottom;
+            pnlLogout.Location = new Point(0, 676);
+            pnlLogout.Name = "pnlLogout";
+            pnlLogout.Size = new Size(233, 46);
+            pnlLogout.TabIndex = 12;
+            // 
+            // btnLogout
+            // 
+            btnLogout.BackColor = Color.FromArgb(244, 67, 54);
+            btnLogout.FlatAppearance.BorderSize = 0;
+            btnLogout.FlatStyle = FlatStyle.Flat;
+            btnLogout.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnLogout.ForeColor = Color.White;
+            btnLogout.Image = Properties.Resources.Logout;
+            btnLogout.ImageAlign = ContentAlignment.MiddleLeft;
+            btnLogout.Location = new Point(0, 11);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Padding = new Padding(3, 0, 0, 0);
+            btnLogout.Size = new Size(250, 35);
+            btnLogout.TabIndex = 5;
+            btnLogout.Text = "Đăng xuất";
+            btnLogout.UseVisualStyleBackColor = false;
+            btnLogout.Click += btnLogout_Click;
             // 
             // pnlDstk
             // 
+            pnlDstk.AutoSize = true;
             pnlDstk.Controls.Add(button9);
             pnlDstk.Controls.Add(btnDsUser);
             pnlDstk.Dock = DockStyle.Top;
-            pnlDstk.Location = new Point(0, 576);
+            pnlDstk.Location = new Point(0, 616);
             pnlDstk.Name = "pnlDstk";
-            pnlDstk.Size = new Size(233, 88);
+            pnlDstk.Size = new Size(233, 60);
             pnlDstk.TabIndex = 10;
             // 
             // button9
@@ -134,7 +172,7 @@ namespace GUI
             button9.ForeColor = Color.White;
             button9.Location = new Point(0, 30);
             button9.Name = "button9";
-            button9.Padding = new Padding(20, 0, 0, 0);
+            button9.Padding = new Padding(40, 0, 0, 0);
             button9.Size = new Size(233, 30);
             button9.TabIndex = 6;
             button9.Text = "Button1";
@@ -151,7 +189,7 @@ namespace GUI
             btnDsUser.ForeColor = Color.White;
             btnDsUser.Location = new Point(0, 0);
             btnDsUser.Name = "btnDsUser";
-            btnDsUser.Padding = new Padding(20, 0, 0, 0);
+            btnDsUser.Padding = new Padding(40, 0, 0, 0);
             btnDsUser.Size = new Size(233, 30);
             btnDsUser.TabIndex = 5;
             btnDsUser.Text = "Danh sách tài khoản";
@@ -164,7 +202,7 @@ namespace GUI
             pnlDsUser.BackColor = Color.DarkOrange;
             pnlDsUser.Controls.Add(btnUser);
             pnlDsUser.Dock = DockStyle.Top;
-            pnlDsUser.Location = new Point(0, 541);
+            pnlDsUser.Location = new Point(0, 581);
             pnlDsUser.Name = "pnlDsUser";
             pnlDsUser.Size = new Size(233, 35);
             pnlDsUser.TabIndex = 11;
@@ -173,7 +211,6 @@ namespace GUI
             // 
             btnUser.BackColor = Color.FromArgb(238, 101, 37);
             btnUser.Controls.Add(pbUser);
-            btnUser.Dock = DockStyle.Fill;
             btnUser.FlatAppearance.BorderSize = 0;
             btnUser.FlatStyle = FlatStyle.Flat;
             btnUser.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
@@ -182,12 +219,10 @@ namespace GUI
             btnUser.ImageAlign = ContentAlignment.MiddleLeft;
             btnUser.Location = new Point(0, 0);
             btnUser.Name = "btnUser";
-            btnUser.Padding = new Padding(10, 0, 0, 0);
-            btnUser.Size = new Size(233, 35);
+            btnUser.Padding = new Padding(7, 0, 60, 0);
+            btnUser.Size = new Size(250, 35);
             btnUser.TabIndex = 5;
             btnUser.Text = "Quản lý tài khoản";
-            btnUser.TextAlign = ContentAlignment.MiddleLeft;
-            btnUser.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnUser.UseVisualStyleBackColor = false;
             btnUser.Click += btnUser_Click;
             // 
@@ -205,13 +240,14 @@ namespace GUI
             // 
             // pnlSubmenuDonHang
             // 
+            pnlSubmenuDonHang.AutoSize = true;
             pnlSubmenuDonHang.Controls.Add(button8);
             pnlSubmenuDonHang.Controls.Add(button7);
             pnlSubmenuDonHang.Controls.Add(button6);
             pnlSubmenuDonHang.Dock = DockStyle.Top;
-            pnlSubmenuDonHang.Location = new Point(0, 453);
+            pnlSubmenuDonHang.Location = new Point(0, 491);
             pnlSubmenuDonHang.Name = "pnlSubmenuDonHang";
-            pnlSubmenuDonHang.Size = new Size(233, 88);
+            pnlSubmenuDonHang.Size = new Size(233, 90);
             pnlSubmenuDonHang.TabIndex = 6;
             // 
             // button8
@@ -224,7 +260,7 @@ namespace GUI
             button8.ForeColor = Color.White;
             button8.Location = new Point(0, 60);
             button8.Name = "button8";
-            button8.Padding = new Padding(20, 0, 0, 0);
+            button8.Padding = new Padding(40, 0, 0, 0);
             button8.Size = new Size(233, 30);
             button8.TabIndex = 7;
             button8.Text = "Button1";
@@ -241,7 +277,7 @@ namespace GUI
             button7.ForeColor = Color.White;
             button7.Location = new Point(0, 30);
             button7.Name = "button7";
-            button7.Padding = new Padding(20, 0, 0, 0);
+            button7.Padding = new Padding(40, 0, 0, 0);
             button7.Size = new Size(233, 30);
             button7.TabIndex = 6;
             button7.Text = "Button1";
@@ -258,7 +294,7 @@ namespace GUI
             button6.ForeColor = Color.White;
             button6.Location = new Point(0, 0);
             button6.Name = "button6";
-            button6.Padding = new Padding(20, 0, 0, 0);
+            button6.Padding = new Padding(40, 0, 0, 0);
             button6.Size = new Size(233, 30);
             button6.TabIndex = 5;
             button6.Text = "Button1";
@@ -270,7 +306,7 @@ namespace GUI
             pnlViTri.BackColor = Color.DarkOrange;
             pnlViTri.Controls.Add(btnDonHang);
             pnlViTri.Dock = DockStyle.Top;
-            pnlViTri.Location = new Point(0, 418);
+            pnlViTri.Location = new Point(0, 456);
             pnlViTri.Name = "pnlViTri";
             pnlViTri.Size = new Size(233, 35);
             pnlViTri.TabIndex = 9;
@@ -279,7 +315,6 @@ namespace GUI
             // 
             btnDonHang.BackColor = Color.FromArgb(238, 101, 37);
             btnDonHang.Controls.Add(pbArrowVitri);
-            btnDonHang.Dock = DockStyle.Fill;
             btnDonHang.FlatAppearance.BorderSize = 0;
             btnDonHang.FlatStyle = FlatStyle.Flat;
             btnDonHang.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
@@ -288,12 +323,10 @@ namespace GUI
             btnDonHang.ImageAlign = ContentAlignment.MiddleLeft;
             btnDonHang.Location = new Point(0, 0);
             btnDonHang.Name = "btnDonHang";
-            btnDonHang.Padding = new Padding(10, 0, 0, 0);
-            btnDonHang.Size = new Size(233, 35);
+            btnDonHang.Padding = new Padding(7, 0, 130, 0);
+            btnDonHang.Size = new Size(250, 35);
             btnDonHang.TabIndex = 5;
             btnDonHang.Text = "Vị trí";
-            btnDonHang.TextAlign = ContentAlignment.MiddleLeft;
-            btnDonHang.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnDonHang.UseVisualStyleBackColor = false;
             btnDonHang.Click += btnDonHang_Click;
             // 
@@ -311,13 +344,14 @@ namespace GUI
             // 
             // pnlSubMenuDssp
             // 
+            pnlSubMenuDssp.AutoSize = true;
             pnlSubMenuDssp.Controls.Add(button5);
             pnlSubMenuDssp.Controls.Add(button4);
             pnlSubMenuDssp.Controls.Add(btnSpkd);
             pnlSubMenuDssp.Dock = DockStyle.Top;
-            pnlSubMenuDssp.Location = new Point(0, 330);
+            pnlSubMenuDssp.Location = new Point(0, 366);
             pnlSubMenuDssp.Name = "pnlSubMenuDssp";
-            pnlSubMenuDssp.Size = new Size(233, 88);
+            pnlSubMenuDssp.Size = new Size(233, 90);
             pnlSubMenuDssp.TabIndex = 4;
             // 
             // button5
@@ -330,7 +364,7 @@ namespace GUI
             button5.ForeColor = Color.White;
             button5.Location = new Point(0, 60);
             button5.Name = "button5";
-            button5.Padding = new Padding(20, 0, 0, 0);
+            button5.Padding = new Padding(40, 0, 0, 0);
             button5.Size = new Size(233, 30);
             button5.TabIndex = 4;
             button5.Text = "Button1";
@@ -347,7 +381,7 @@ namespace GUI
             button4.ForeColor = Color.White;
             button4.Location = new Point(0, 30);
             button4.Name = "button4";
-            button4.Padding = new Padding(20, 0, 0, 0);
+            button4.Padding = new Padding(40, 0, 0, 0);
             button4.Size = new Size(233, 30);
             button4.TabIndex = 3;
             button4.Text = "Button1";
@@ -364,7 +398,7 @@ namespace GUI
             btnSpkd.ForeColor = Color.White;
             btnSpkd.Location = new Point(0, 0);
             btnSpkd.Name = "btnSpkd";
-            btnSpkd.Padding = new Padding(20, 0, 0, 0);
+            btnSpkd.Padding = new Padding(40, 0, 0, 0);
             btnSpkd.Size = new Size(233, 30);
             btnSpkd.TabIndex = 2;
             btnSpkd.Text = "Sản phẩm kinh doanh";
@@ -377,7 +411,7 @@ namespace GUI
             pnlDssp.BackColor = Color.DarkOrange;
             pnlDssp.Controls.Add(btnDssp);
             pnlDssp.Dock = DockStyle.Top;
-            pnlDssp.Location = new Point(0, 295);
+            pnlDssp.Location = new Point(0, 331);
             pnlDssp.Name = "pnlDssp";
             pnlDssp.Size = new Size(233, 35);
             pnlDssp.TabIndex = 8;
@@ -386,7 +420,6 @@ namespace GUI
             // 
             btnDssp.BackColor = Color.FromArgb(238, 101, 37);
             btnDssp.Controls.Add(pbArrowDssp);
-            btnDssp.Dock = DockStyle.Fill;
             btnDssp.FlatAppearance.BorderSize = 0;
             btnDssp.FlatStyle = FlatStyle.Flat;
             btnDssp.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
@@ -395,12 +428,10 @@ namespace GUI
             btnDssp.ImageAlign = ContentAlignment.MiddleLeft;
             btnDssp.Location = new Point(0, 0);
             btnDssp.Name = "btnDssp";
-            btnDssp.Padding = new Padding(10, 0, 0, 0);
-            btnDssp.Size = new Size(233, 35);
+            btnDssp.Padding = new Padding(7, 0, 50, 0);
+            btnDssp.Size = new Size(250, 35);
             btnDssp.TabIndex = 3;
             btnDssp.Text = "Danh sách sản phẩm";
-            btnDssp.TextAlign = ContentAlignment.MiddleLeft;
-            btnDssp.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnDssp.UseVisualStyleBackColor = false;
             btnDssp.Click += btnDssp_Click;
             // 
@@ -418,11 +449,12 @@ namespace GUI
             // 
             // pnlSubMenuKho
             // 
+            pnlSubMenuKho.AutoSize = true;
             pnlSubMenuKho.Controls.Add(button2);
             pnlSubMenuKho.Controls.Add(button1);
             pnlSubMenuKho.Controls.Add(btnThemKho);
             pnlSubMenuKho.Dock = DockStyle.Top;
-            pnlSubMenuKho.Location = new Point(0, 205);
+            pnlSubMenuKho.Location = new Point(0, 241);
             pnlSubMenuKho.Name = "pnlSubMenuKho";
             pnlSubMenuKho.Size = new Size(233, 90);
             pnlSubMenuKho.TabIndex = 2;
@@ -437,7 +469,7 @@ namespace GUI
             button2.ForeColor = Color.White;
             button2.Location = new Point(0, 60);
             button2.Name = "button2";
-            button2.Padding = new Padding(20, 0, 0, 0);
+            button2.Padding = new Padding(40, 0, 0, 0);
             button2.Size = new Size(233, 30);
             button2.TabIndex = 2;
             button2.Text = "Button1";
@@ -454,7 +486,7 @@ namespace GUI
             button1.ForeColor = Color.White;
             button1.Location = new Point(0, 30);
             button1.Name = "button1";
-            button1.Padding = new Padding(20, 0, 0, 0);
+            button1.Padding = new Padding(40, 0, 0, 0);
             button1.Size = new Size(233, 30);
             button1.TabIndex = 1;
             button1.Text = "Button1";
@@ -471,7 +503,7 @@ namespace GUI
             btnThemKho.ForeColor = Color.White;
             btnThemKho.Location = new Point(0, 0);
             btnThemKho.Name = "btnThemKho";
-            btnThemKho.Padding = new Padding(20, 0, 0, 0);
+            btnThemKho.Padding = new Padding(40, 0, 0, 0);
             btnThemKho.Size = new Size(233, 30);
             btnThemKho.TabIndex = 0;
             btnThemKho.Text = "Thêm kho xuất";
@@ -484,16 +516,16 @@ namespace GUI
             pnlDsKho.BackColor = Color.DarkOrange;
             pnlDsKho.Controls.Add(btnDsKho);
             pnlDsKho.Dock = DockStyle.Top;
-            pnlDsKho.Location = new Point(0, 170);
+            pnlDsKho.Location = new Point(0, 206);
             pnlDsKho.Name = "pnlDsKho";
             pnlDsKho.Size = new Size(233, 35);
-            pnlDsKho.TabIndex = 1;
+            pnlDsKho.TabIndex = 3;
             // 
             // btnDsKho
             // 
+            btnDsKho.AutoSize = true;
             btnDsKho.BackColor = Color.FromArgb(238, 101, 37);
             btnDsKho.Controls.Add(pbArrowDsKho);
-            btnDsKho.Dock = DockStyle.Fill;
             btnDsKho.FlatAppearance.BorderSize = 0;
             btnDsKho.FlatStyle = FlatStyle.Flat;
             btnDsKho.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
@@ -502,12 +534,10 @@ namespace GUI
             btnDsKho.ImageAlign = ContentAlignment.MiddleLeft;
             btnDsKho.Location = new Point(0, 0);
             btnDsKho.Name = "btnDsKho";
-            btnDsKho.Padding = new Padding(10, 0, 0, 0);
-            btnDsKho.Size = new Size(233, 35);
+            btnDsKho.Padding = new Padding(5, 0, 80, 0);
+            btnDsKho.Size = new Size(250, 35);
             btnDsKho.TabIndex = 1;
             btnDsKho.Text = "Danh sách kho";
-            btnDsKho.TextAlign = ContentAlignment.MiddleLeft;
-            btnDsKho.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnDsKho.UseVisualStyleBackColor = false;
             btnDsKho.Click += btnDsKho_Click;
             // 
@@ -523,35 +553,35 @@ namespace GUI
             pbArrowDsKho.TabStop = false;
             pbArrowDsKho.Click += pbArrowDsKho_Click;
             // 
-            // panel2
+            // pnlLogo
             // 
-            panel2.Controls.Add(pictureBox1);
-            panel2.Controls.Add(pnlUser);
-            panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(0, 0);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(233, 170);
-            panel2.TabIndex = 0;
+            pnlLogo.Controls.Add(pbLogo);
+            pnlLogo.Dock = DockStyle.Top;
+            pnlLogo.Location = new Point(0, 36);
+            pnlLogo.Name = "pnlLogo";
+            pnlLogo.Size = new Size(233, 170);
+            pnlLogo.TabIndex = 2;
             // 
-            // pictureBox1
+            // pbLogo
             // 
-            pictureBox1.Dock = DockStyle.Fill;
-            pictureBox1.Image = Properties.Resources.logo;
-            pictureBox1.Location = new Point(0, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(233, 135);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            pbLogo.Dock = DockStyle.Fill;
+            pbLogo.Image = Properties.Resources.logo;
+            pbLogo.Location = new Point(0, 0);
+            pbLogo.Name = "pbLogo";
+            pbLogo.Size = new Size(233, 170);
+            pbLogo.SizeMode = PictureBoxSizeMode.Zoom;
+            pbLogo.TabIndex = 0;
+            pbLogo.TabStop = false;
             // 
-            // pnlUser
+            // pnlMenu
             // 
-            pnlUser.Controls.Add(lbUser);
-            pnlUser.Dock = DockStyle.Bottom;
-            pnlUser.Location = new Point(0, 135);
-            pnlUser.Name = "pnlUser";
-            pnlUser.Size = new Size(233, 35);
-            pnlUser.TabIndex = 1;
+            pnlMenu.Controls.Add(lbUser);
+            pnlMenu.Controls.Add(btnMenu);
+            pnlMenu.Dock = DockStyle.Top;
+            pnlMenu.Location = new Point(0, 0);
+            pnlMenu.Name = "pnlMenu";
+            pnlMenu.Size = new Size(233, 36);
+            pnlMenu.TabIndex = 1;
             // 
             // lbUser
             // 
@@ -560,10 +590,28 @@ namespace GUI
             lbUser.ForeColor = Color.White;
             lbUser.Location = new Point(0, 0);
             lbUser.Name = "lbUser";
-            lbUser.Size = new Size(233, 35);
+            lbUser.Size = new Size(188, 36);
             lbUser.TabIndex = 0;
             lbUser.Text = "label1";
             lbUser.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // btnMenu
+            // 
+            btnMenu.BackColor = Color.Transparent;
+            btnMenu.Dock = DockStyle.Right;
+            btnMenu.FlatAppearance.BorderSize = 0;
+            btnMenu.FlatStyle = FlatStyle.Flat;
+            btnMenu.Image = Properties.Resources.Menu;
+            btnMenu.ImageAlign = ContentAlignment.MiddleRight;
+            btnMenu.Location = new Point(188, 0);
+            btnMenu.Name = "btnMenu";
+            btnMenu.Padding = new Padding(0, 0, 5, 0);
+            btnMenu.Size = new Size(45, 36);
+            btnMenu.TabIndex = 1;
+            btnMenu.UseVisualStyleBackColor = false;
+            btnMenu.Click += btnMenu_Click;
+            btnMenu.MouseEnter += btnMenu_MouseEnter;
+            btnMenu.MouseLeave += btnMenu_MouseLeave;
             // 
             // panel5
             // 
@@ -572,19 +620,6 @@ namespace GUI
             panel5.Name = "panel5";
             panel5.Size = new Size(233, 40);
             panel5.TabIndex = 7;
-            // 
-            // tblShowForm
-            // 
-            tblShowForm.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            tblShowForm.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            tblShowForm.ColumnCount = 1;
-            tblShowForm.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tblShowForm.Location = new Point(250, 32);
-            tblShowForm.Name = "tblShowForm";
-            tblShowForm.RowCount = 1;
-            tblShowForm.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tblShowForm.Size = new Size(830, 547);
-            tblShowForm.TabIndex = 1;
             // 
             // timer1
             // 
@@ -602,7 +637,7 @@ namespace GUI
             pnlTitleBar.Location = new Point(0, 0);
             pnlTitleBar.Name = "pnlTitleBar";
             pnlTitleBar.Size = new Size(1080, 31);
-            pnlTitleBar.TabIndex = 2;
+            pnlTitleBar.TabIndex = 0;
             pnlTitleBar.MouseDoubleClick += pnlTitleBar_MouseDoubleClick;
             pnlTitleBar.MouseDown += pnlTitleBar_MouseDown;
             pnlTitleBar.MouseMove += pnlTitleBar_MouseMove;
@@ -632,7 +667,7 @@ namespace GUI
             btnMinimize.Location = new Point(987, 0);
             btnMinimize.Name = "btnMinimize";
             btnMinimize.Size = new Size(31, 31);
-            btnMinimize.TabIndex = 0;
+            btnMinimize.TabIndex = 2;
             btnMinimize.UseVisualStyleBackColor = false;
             btnMinimize.Click += btnMinimize_Click;
             btnMinimize.MouseEnter += btnMinimize_MouseEnter;
@@ -648,7 +683,7 @@ namespace GUI
             btnMaximize.Location = new Point(1018, 0);
             btnMaximize.Name = "btnMaximize";
             btnMaximize.Size = new Size(31, 31);
-            btnMaximize.TabIndex = 0;
+            btnMaximize.TabIndex = 3;
             btnMaximize.UseVisualStyleBackColor = false;
             btnMaximize.Click += btnMaximize_Click;
             btnMaximize.MouseEnter += btnMaximize_MouseEnter;
@@ -664,18 +699,32 @@ namespace GUI
             btnClose.Location = new Point(1049, 0);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(31, 31);
-            btnClose.TabIndex = 0;
+            btnClose.TabIndex = 4;
             btnClose.UseVisualStyleBackColor = false;
             btnClose.Click += btnClose_Click;
             btnClose.MouseEnter += btnClose_MouseEnter;
             btnClose.MouseLeave += btnClose_MouseLeave;
+            // 
+            // CollapseTimer
+            // 
+            CollapseTimer.Enabled = true;
+            CollapseTimer.Interval = 10;
+            CollapseTimer.Tick += CollapseTimer_Tick;
+            // 
+            // pnlShowForm
+            // 
+            pnlShowForm.Dock = DockStyle.Fill;
+            pnlShowForm.Location = new Point(250, 31);
+            pnlShowForm.Name = "pnlShowForm";
+            pnlShowForm.Size = new Size(830, 548);
+            pnlShowForm.TabIndex = 6;
             // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1080, 584);
-            Controls.Add(tblShowForm);
+            Controls.Add(pnlShowForm);
             Controls.Add(pnlSideBar);
             Controls.Add(pnlTitleBar);
             FormBorderStyle = FormBorderStyle.None;
@@ -683,11 +732,14 @@ namespace GUI
             MdiChildrenMinimizedAnchorBottom = false;
             MinimumSize = new Size(950, 450);
             Name = "FormMain";
+            Padding = new Padding(0, 0, 0, 5);
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Data management";
             FormClosing += Form2_FormClosing;
             Load += FormMain_Load;
             pnlSideBar.ResumeLayout(false);
+            pnlSideBar.PerformLayout();
+            pnlLogout.ResumeLayout(false);
             pnlDstk.ResumeLayout(false);
             pnlDsUser.ResumeLayout(false);
             btnUser.ResumeLayout(false);
@@ -702,11 +754,12 @@ namespace GUI
             ((System.ComponentModel.ISupportInitialize)pbArrowDssp).EndInit();
             pnlSubMenuKho.ResumeLayout(false);
             pnlDsKho.ResumeLayout(false);
+            pnlDsKho.PerformLayout();
             btnDsKho.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pbArrowDsKho).EndInit();
-            panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            pnlUser.ResumeLayout(false);
+            pnlLogo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pbLogo).EndInit();
+            pnlMenu.ResumeLayout(false);
             pnlTitleBar.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -714,14 +767,13 @@ namespace GUI
         #endregion
         private Panel pnlSideBar;
         private Button btnDsKho;
-        private Panel panel2;
-        private PictureBox pictureBox1;
+        private Panel pnlLogo;
+        private PictureBox pbLogo;
         private Panel pnlSubMenuKho;
         private Button btnThemKho;
         private Panel pnlSubMenuDssp;
         private Button btnDssp;
         private Button btnDonHang;
-        private TableLayoutPanel tblShowForm;
         private Panel pnlSubmenuDonHang;
         private PictureBox pbArrowDsKho;
         private PictureBox pbArrowDssp;
@@ -744,7 +796,6 @@ namespace GUI
         private Button button8;
         private Button button5;
         private Button button2;
-        private Panel pnlUser;
         private Label lbUser;
         private System.Windows.Forms.Timer timer1;
         private Panel pnlTitleBar;
@@ -752,5 +803,11 @@ namespace GUI
         private Button btnMinimize;
         private Button btnMaximize;
         private Button btnClose;
+        private Button btnMenu;
+        private System.Windows.Forms.Timer CollapseTimer;
+        private Panel pnlMenu;
+        private Panel pnlShowForm;
+        private Panel pnlLogout;
+        private Button btnLogout;
     }
 }

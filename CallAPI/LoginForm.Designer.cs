@@ -242,6 +242,7 @@
             Name = "LoginForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Đăng nhập";
+            FormClosing += LoginForm_FormClosing;
             Load += LoginForm_Load;
             KeyDown += LoginForm_KeyDown;
             panel1.ResumeLayout(false);

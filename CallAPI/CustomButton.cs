@@ -16,7 +16,6 @@ namespace UserControl2
         private int borderSize = 0;
         private int borderRadius = 20;
         private Color borderColor = Color.PaleVioletRed;
-
         //Properties
         [Category("Custom Props")]
         public int BorderSize
@@ -147,6 +146,7 @@ namespace UserControl2
 
         private void Button_Resize(object sender, EventArgs e)
         {
+            if (this.Visible) this.Refresh();
             if (borderRadius > this.Height)
                 borderRadius = this.Height;
         }

@@ -163,5 +163,9 @@ namespace UserControl2
             this.KeyPreview = true;
         }
 
+        private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

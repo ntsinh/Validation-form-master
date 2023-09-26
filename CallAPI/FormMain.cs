@@ -2,12 +2,14 @@
 using CallAPI;
 using DTO;
 using GUI.Properties;
+using Org.BouncyCastle.Crmf;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -31,6 +33,12 @@ namespace GUI
             pnlSubMenuDssp.Visible = false;
             pnlSubmenuDonHang.Visible = false;
             pnlDstk.Visible = false;
+        }
+        private void unFocus()
+        {
+            btnThemKho.BackColor = Color.Gray;
+            btnSpkd.BackColor = Color.Gray;
+            btnDsUser.BackColor = Color.Gray;
         }
         //nếu có subMenu đang bật => tắt
         private void hideSubmenu()
@@ -59,6 +67,8 @@ namespace GUI
         //nếu subMenu cần mở đang tắt => bật
         private void showSubmenu(Panel subMenu, PictureBox pb)
         {
+            colapse = true;
+            CollapseTimer.Start();
             if (subMenu.Visible == false)
             {
                 hideSubmenu();
@@ -82,20 +92,40 @@ namespace GUI
             showSubmenu(pnlSubMenuDssp, pbArrowDssp);
         }
         //mở childform
-        public void openChildForm(Form childForm)
+        public void openChildForm(Form childForm, object sender)
         {
-            childForm.TopLevel = false;
-            childForm.FormBorderStyle = FormBorderStyle.None;
-            childForm.Dock = DockStyle.Fill;
-            tblShowForm.Controls.Add(childForm);
-            tblShowForm.Tag = childForm;
-            childForm.BringToFront();
-            childForm.Show();
+            unFocus();
+            Button button = (Button)sender;
+            button.BackColor = Color.FromArgb(89, 206, 143);
+            bool isOpen = false;
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f.Name == childForm.Name)
+                {
+                    isOpen = true;
+                    f.BringToFront();
+                    break;
+                }
+                else
+                {
+                    isOpen = false;
+                }
+            }
+            if (isOpen == false)
+            {
+                childForm.TopLevel = false;
+                childForm.FormBorderStyle = FormBorderStyle.None;
+                childForm.Dock = DockStyle.Fill;
+                pnlShowForm.Controls.Add(childForm);
+                pnlShowForm.Tag = childForm;
+                childForm.BringToFront();
+                childForm.Show();
+            }
         }
 
         private void btnThemKho_Click(object sender, EventArgs e)
         {
-            openChildForm(new Form1());
+            openChildForm(new Form1(), sender);
         }
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
@@ -131,12 +161,12 @@ namespace GUI
 
         private void btnSpkd_Click(object sender, EventArgs e)
         {
-            openChildForm(new frmSPKD());
+            openChildForm(new frmSPKD(), sender);
         }
 
         private void btnDsUser_Click(object sender, EventArgs e)
         {
-            openChildForm(new UserForm());
+            openChildForm(new UserForm(), sender);
         }
 
         private void btnUser_Click(object sender, EventArgs e)
@@ -204,6 +234,7 @@ namespace GUI
             }
         }
         #region Title bar event
+        //sự kiện của các button trên tittle bar
         private void btnClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -275,6 +306,7 @@ namespace GUI
         int xLast, yLast;
         private void pnlTitleBar_MouseDown(object sender, MouseEventArgs e)
         {
+            //di chuyển form khi nhấn giữ và kéo thả chuột trên tittle bar
             drag = true;
             xLast = e.X;
             yLast = e.Y;
@@ -293,6 +325,7 @@ namespace GUI
             }
         }
         #endregion
+        // cho phép resize form
         #region Resize form
         private const int cGrip = 16;      // Grip size
         private const int cCaption = 32;   // Caption bar height;
@@ -316,6 +349,69 @@ namespace GUI
             base.WndProc(ref m);
         }
         #endregion
+        bool colapse = true;
+        private void CollapseTimer_Tick(object sender, EventArgs e)
+        {
+            if (colapse)
+            {
+                btnMenu.Image = Resources.Collapse;
+                pnlSideBar.Width += 40;
+                pnlShowForm.Visible = false;
+                if (pnlSideBar.Width == 250)
+                {
+                    pnlShowForm.Visible = true;
+                    CollapseTimer.Stop();
+                    //pnlLogo.Visible = true;
+                    lbUser.Visible = true;
+                    colapse = false;
+                }
+            }
+            else
+            {
+                hideSubmenu();
+                lbUser.Visible = false;
+                btnMenu.Image = Resources.Menu;
+                pnlSideBar.Width -= 40;
+                pnlShowForm.Visible = false;
+                if (pnlSideBar.Width == 45)
+                {
+                    pnlShowForm.Visible = true;
+                    CollapseTimer.Stop();
+                    //pnlLogo.Height = 50;
+                    colapse = true;
+                }
+            }
+        }
 
+        private void btnMenu_Click(object sender, EventArgs e)
+        {
+            CollapseTimer.Start();
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            LoginForm lg = new LoginForm();
+            lg.Show();
+            this.Hide();
+        }
+
+        private void btnMenu_MouseEnter(object sender, EventArgs e)
+        {
+            btnMenu.BackColor = Color.FromArgb(89, 206, 143);
+        }
+
+        private void btnMenu_MouseLeave(object sender, EventArgs e)
+        {
+            btnMenu.BackColor = Color.Transparent;
+        }
+        //protected override CreateParams CreateParams
+        //{
+        //    get
+        //    {
+        //        CreateParams cp = base.CreateParams;
+        //        cp.ExStyle |= 0x02000000;
+        //        return cp;
+        //    }
+        //}
     }
 }

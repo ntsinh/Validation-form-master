@@ -44,10 +44,12 @@
             txtTenKho = new GUI.Components.Textboxs.TextBoxCustom();
             txtMoTa = new GUI.Components.Textboxs.TextBoxCustom();
             txtMaKho = new GUI.Components.Textboxs.TextBoxCustom();
+            tableLayoutPanel2 = new TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)dgvKho).BeginInit();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
+            tableLayoutPanel2.SuspendLayout();
             SuspendLayout();
             // 
             // dgvKho
@@ -120,10 +122,8 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(tableLayoutPanel2);
             panel2.Controls.Add(label4);
-            panel2.Controls.Add(btnXoa);
-            panel2.Controls.Add(btnThem);
-            panel2.Controls.Add(btnSua);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
@@ -143,22 +143,22 @@
             // 
             // btnXoa
             // 
-            btnXoa.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnXoa.BackColor = Color.Red;
-            btnXoa.BackgroundColor = Color.Red;
+            btnXoa.BackColor = Color.FromArgb(244, 67, 54);
+            btnXoa.BackgroundColor = Color.FromArgb(244, 67, 54);
             btnXoa.BorderColor = Color.Red;
             btnXoa.BorderRadius = 5;
             btnXoa.BorderSize = 0;
+            btnXoa.Dock = DockStyle.Fill;
             btnXoa.FlatAppearance.BorderSize = 0;
             btnXoa.FlatStyle = FlatStyle.Flat;
             btnXoa.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnXoa.ForeColor = Color.White;
             btnXoa.Image = GUI.Properties.Resources.delete25;
             btnXoa.ImageAlign = ContentAlignment.MiddleLeft;
-            btnXoa.Location = new Point(719, 6);
+            btnXoa.Location = new Point(211, 8);
             btnXoa.Name = "btnXoa";
             btnXoa.Padding = new Padding(0, 0, 12, 0);
-            btnXoa.Size = new Size(100, 35);
+            btnXoa.Size = new Size(99, 34);
             btnXoa.TabIndex = 7;
             btnXoa.TabStop = false;
             btnXoa.Text = "Xóa";
@@ -169,23 +169,23 @@
             // 
             // btnThem
             // 
-            btnThem.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnThem.BackColor = Color.FromArgb(238, 101, 37);
             btnThem.BackgroundColor = Color.FromArgb(238, 101, 37);
             btnThem.BackgroundImageLayout = ImageLayout.None;
             btnThem.BorderColor = Color.Orange;
             btnThem.BorderRadius = 5;
             btnThem.BorderSize = 0;
+            btnThem.Dock = DockStyle.Fill;
             btnThem.FlatAppearance.BorderSize = 0;
             btnThem.FlatStyle = FlatStyle.Flat;
             btnThem.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnThem.ForeColor = Color.White;
             btnThem.Image = GUI.Properties.Resources.addNew25;
             btnThem.ImageAlign = ContentAlignment.MiddleLeft;
-            btnThem.Location = new Point(507, 6);
+            btnThem.Location = new Point(3, 8);
             btnThem.Name = "btnThem";
             btnThem.Padding = new Padding(0, 0, 5, 0);
-            btnThem.Size = new Size(100, 35);
+            btnThem.Size = new Size(98, 34);
             btnThem.TabIndex = 5;
             btnThem.Text = "Thêm";
             btnThem.TextAlign = ContentAlignment.MiddleRight;
@@ -195,22 +195,22 @@
             // 
             // btnSua
             // 
-            btnSua.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnSua.BackColor = Color.FromArgb(0, 192, 0);
-            btnSua.BackgroundColor = Color.FromArgb(0, 192, 0);
+            btnSua.BackColor = Color.FromArgb(89, 206, 143);
+            btnSua.BackgroundColor = Color.FromArgb(89, 206, 143);
             btnSua.BorderColor = Color.Orange;
             btnSua.BorderRadius = 5;
             btnSua.BorderSize = 0;
+            btnSua.Dock = DockStyle.Fill;
             btnSua.FlatAppearance.BorderSize = 0;
             btnSua.FlatStyle = FlatStyle.Flat;
             btnSua.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnSua.ForeColor = Color.White;
             btnSua.Image = GUI.Properties.Resources.update25;
             btnSua.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSua.Location = new Point(613, 6);
+            btnSua.Location = new Point(107, 8);
             btnSua.Name = "btnSua";
             btnSua.Padding = new Padding(0, 0, 12, 0);
-            btnSua.Size = new Size(100, 35);
+            btnSua.Size = new Size(98, 34);
             btnSua.TabIndex = 6;
             btnSua.Text = "Sửa";
             btnSua.TextAlign = ContentAlignment.MiddleRight;
@@ -296,6 +296,24 @@
             txtMaKho.TabIndex = 0;
             txtMaKho.ValidationType = GUI.Components.Textboxs.TextBoxCustom.eValidationType.SpecialChar;
             // 
+            // tableLayoutPanel2
+            // 
+            tableLayoutPanel2.ColumnCount = 3;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel2.Controls.Add(btnXoa, 2, 0);
+            tableLayoutPanel2.Controls.Add(btnSua, 1, 0);
+            tableLayoutPanel2.Controls.Add(btnThem, 0, 0);
+            tableLayoutPanel2.Dock = DockStyle.Right;
+            tableLayoutPanel2.Location = new Point(507, 0);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.Padding = new Padding(0, 5, 10, 5);
+            tableLayoutPanel2.RowCount = 1;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel2.Size = new Size(323, 50);
+            tableLayoutPanel2.TabIndex = 9;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -316,6 +334,7 @@
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -338,5 +357,6 @@
         private GUI.Components.Textboxs.TextBoxCustom txtMaKho;
         private GUI.Components.Textboxs.TextBoxCustom txtTenKho;
         private GUI.Components.Textboxs.TextBoxCustom txtMoTa;
+        private TableLayoutPanel tableLayoutPanel2;
     }
 }
