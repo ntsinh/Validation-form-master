@@ -23,8 +23,9 @@ namespace GUI
         {
             InitializeComponent();
             subMenu();
-            this.DoubleBuffered = true;
-            this.SetStyle(ControlStyles.ResizeRedraw, true);
+            DoubleBuffered = true;
+            SetStyle(ControlStyles.ResizeRedraw, true);
+            this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
         }
         //ẩn các subMenu
         private void subMenu()
@@ -46,22 +47,22 @@ namespace GUI
             if (pnlSubMenuKho.Visible == true)
             {
                 pnlSubMenuKho.Visible = false;
-                pbArrowDsKho.Image = Properties.Resources.DownArrow;
+                pbArrowDsKho.Image = Resources.DownArrow;
             }
             if (pnlSubMenuDssp.Visible == true)
             {
                 pnlSubMenuDssp.Visible = false;
-                pbArrowDssp.Image = Properties.Resources.DownArrow;
+                pbArrowDssp.Image = Resources.DownArrow;
             }
             if (pnlSubmenuDonHang.Visible == true)
             {
                 pnlSubmenuDonHang.Visible = false;
-                pbArrowVitri.Image = Properties.Resources.DownArrow;
+                pbArrowVitri.Image = Resources.DownArrow;
             }
             if (pnlDstk.Visible == true)
             {
                 pnlDstk.Visible = false;
-                pbUser.Image = Properties.Resources.DownArrow;
+                pbUser.Image = Resources.DownArrow;
             }
         }
         //nếu subMenu cần mở đang tắt => bật
@@ -73,12 +74,12 @@ namespace GUI
             {
                 hideSubmenu();
                 subMenu.Visible = true;
-                pb.Image = Properties.Resources.UpArrow;
+                pb.Image = Resources.UpArrow;
             }
             else
             {
                 subMenu.Visible = false;
-                pb.Image = Properties.Resources.DownArrow;
+                pb.Image = Resources.DownArrow;
             }
         }
 
@@ -244,13 +245,14 @@ namespace GUI
         {
             if (WindowState == FormWindowState.Maximized)
             {
-                btnMaximize.Image = Properties.Resources.maximize;
+                btnMaximize.Image = Resources.maximize;
                 WindowState = FormWindowState.Normal;
+                this.SetDesktopLocation(xForm, yForm);
             }
             else if (WindowState == FormWindowState.Normal)
             {
                 WindowState = FormWindowState.Maximized;
-                btnMaximize.Image = Properties.Resources.restore_down;
+                btnMaximize.Image = Resources.restore_down;
             }
         }
 
@@ -291,38 +293,97 @@ namespace GUI
 
         private void pnlTitleBar_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            //khi doubleclick chuột vào tittlebar nếu form ở trạng thái maximize thì set form thành normal và đưa form về vị trí trước khi maximize
             if (WindowState == FormWindowState.Maximized)
             {
-                btnMaximize.Image = Properties.Resources.maximize;
+                btnMaximize.Image = Resources.maximize;
                 WindowState = FormWindowState.Normal;
+                top = false;
+                this.SetDesktopLocation(xForm, yForm);
             }
             else if (WindowState == FormWindowState.Normal)
             {
                 WindowState = FormWindowState.Maximized;
-                btnMaximize.Image = Properties.Resources.restore_down;
+                btnMaximize.Image = Resources.restore_down;
             }
         }
-        bool drag = false;
-        int xLast, yLast;
+        bool click = false;
+        bool top = false;
+        int xLast, yLast, xForm, yForm, formWidth, formHeight;
         private void pnlTitleBar_MouseDown(object sender, MouseEventArgs e)
         {
             //di chuyển form khi nhấn giữ và kéo thả chuột trên tittle bar
-            drag = true;
             xLast = e.X;
             yLast = e.Y;
+            click = true;
+            formWidth = this.Width;
+            formHeight = this.Height;
         }
 
         private void pnlTitleBar_MouseUp(object sender, MouseEventArgs e)
         {
-            drag = false;
+            click = false;
+            // sau khi kéo thả chuột nếu form ở trạng thái normal và tittle bar có vị trí bằng với cạnh trên màn hình thì chuyển trạng thái của form thàng maximize
+            if (top == true && WindowState == FormWindowState.Normal)
+            {
+                WindowState = FormWindowState.Maximized;
+                btnMaximize.Image = Resources.restore_down;
+            }
+
         }
 
         private void pnlTitleBar_MouseMove(object sender, MouseEventArgs e)
         {
-            if (drag)
+            if (click)
             {
+                //di chuyển form đến vị trí kéo thả của chuột
                 this.SetDesktopLocation(MousePosition.X - xLast, MousePosition.Y - yLast);
+                //nếu top của form lớn hơn hoặc bằng cạnh trên của màn hình => set vị trí form bằng cạnh trên màn hình => tránh thanh tittle bar bị che
+                //đồng thời set form = maximize
+                if (this.Top <= Screen.PrimaryScreen.Bounds.Top)
+                {
+                    this.Top = Screen.PrimaryScreen.Bounds.Top;
+                    top = true;
+                }
+                else
+                {
+                    top = false;
+                }
+                //nếu form trong trạng thái maximize và được kéo xuống 1 khoảng y = 1 thì chuyển trạng thái của form thành normal
+                if (MousePosition.Y - yLast > 1)
+                {
+                    if (WindowState == FormWindowState.Maximized)
+                    {
+                        WindowState = FormWindowState.Normal;
+                        btnMaximize.Image = Resources.maximize;
+                    }
+                }
             }
+
+        }
+        private void FormMain_Move(object sender, EventArgs e)
+        {
+            //lấy vị trí cuối của form trước khi bị di chuyển
+            if (WindowState == FormWindowState.Normal && click == false)
+            {
+                xForm = this.DesktopLocation.X;
+                yForm = this.DesktopLocation.Y;
+            }
+        }
+
+        private void FormMain_SizeChanged(object sender, EventArgs e)
+        {
+            //lấy vị trí cuối của form trước khi maximize
+            if (WindowState == FormWindowState.Normal && this.Top > Screen.PrimaryScreen.Bounds.Top)
+            {
+                xForm = this.DesktopLocation.X;
+                yForm = this.DesktopLocation.Y;
+            }
+        }
+
+        private void FormMain_MouseClick(object sender, MouseEventArgs e)
+        {
+
         }
         #endregion
         // cho phép resize form
@@ -331,19 +392,22 @@ namespace GUI
         private const int cCaption = 32;   // Caption bar height;
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == 0x84)
-            {  // Trap WM_NCHITTEST
-                Point pos = new Point(m.LParam.ToInt32());
-                pos = this.PointToClient(pos);
-                if (pos.Y < cCaption)
-                {
-                    m.Result = (IntPtr)2;  // HTCAPTION
-                    return;
-                }
-                if (pos.X >= this.ClientSize.Width - cGrip && pos.Y >= this.ClientSize.Height - cGrip)
-                {
-                    m.Result = (IntPtr)17; // HTBOTTOMRIGHT
-                    return;
+            if (WindowState == FormWindowState.Normal)
+            {
+                if (m.Msg == 0x84)
+                {  // Trap WM_NCHITTEST
+                    Point pos = new Point(m.LParam.ToInt32());
+                    pos = this.PointToClient(pos);
+                    if (pos.Y < cCaption)
+                    {
+                        m.Result = (IntPtr)2;  // HTCAPTION
+                        return;
+                    }
+                    if (pos.X >= this.ClientSize.Width - cGrip && pos.Y >= this.ClientSize.Height - cGrip)
+                    {
+                        m.Result = (IntPtr)17; // HTBOTTOMRIGHT
+                        return;
+                    }
                 }
             }
             base.WndProc(ref m);
@@ -361,7 +425,6 @@ namespace GUI
                 {
                     pnlShowForm.Visible = true;
                     CollapseTimer.Stop();
-                    //pnlLogo.Visible = true;
                     lbUser.Visible = true;
                     colapse = false;
                 }
@@ -377,7 +440,6 @@ namespace GUI
                 {
                     pnlShowForm.Visible = true;
                     CollapseTimer.Stop();
-                    //pnlLogo.Height = 50;
                     colapse = true;
                 }
             }
@@ -404,6 +466,9 @@ namespace GUI
         {
             btnMenu.BackColor = Color.Transparent;
         }
+
+
+
         //protected override CreateParams CreateParams
         //{
         //    get

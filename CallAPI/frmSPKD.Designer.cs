@@ -748,8 +748,7 @@
             // 
             // frmSPKD
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.Inherit;
             BackColor = Color.LightGray;
             ClientSize = new Size(830, 549);
             Controls.Add(pnlFilter);

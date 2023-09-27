@@ -602,10 +602,8 @@ namespace GUI
             btnMenu.FlatAppearance.BorderSize = 0;
             btnMenu.FlatStyle = FlatStyle.Flat;
             btnMenu.Image = Properties.Resources.Menu;
-            btnMenu.ImageAlign = ContentAlignment.MiddleRight;
             btnMenu.Location = new Point(188, 0);
             btnMenu.Name = "btnMenu";
-            btnMenu.Padding = new Padding(0, 0, 5, 0);
             btnMenu.Size = new Size(45, 36);
             btnMenu.TabIndex = 1;
             btnMenu.UseVisualStyleBackColor = false;
@@ -737,6 +735,9 @@ namespace GUI
             Text = "Data management";
             FormClosing += Form2_FormClosing;
             Load += FormMain_Load;
+            SizeChanged += FormMain_SizeChanged;
+            MouseClick += FormMain_MouseClick;
+            Move += FormMain_Move;
             pnlSideBar.ResumeLayout(false);
             pnlSideBar.PerformLayout();
             pnlLogout.ResumeLayout(false);
