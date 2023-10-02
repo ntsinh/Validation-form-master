@@ -34,29 +34,10 @@ namespace GUI
         #region them user
         private async void btnThem_Click(object sender, EventArgs e)
         {
-
-            //if (check())
-            //{
-            //    tbUser.Error = "User Name đã tồn tại";
-            //}
-            //else
-            //{
-            //    User user = new User();
-            //    user.Username = tbUser.Text;
-            //    user.Password = tbPw.Text;
-            //    user.Email = tbEmail.Text;
-            //    listUsers.Add(user);
-            //    saveJson();
-            //    resetDgvUser();
-            //    dgvUser.DataSource = listUsers;
-            //}
-            tbUser.ErrorLable(true);
             if (tbPw.Text == "")
             {
                 //nếu tbPw rỗng => bật cảnh báo
                 tbPw.AllowNull = false;
-                tbPw.ErrorLable(true);
-
             }
             var user = listUsers.FirstOrDefault(u => u.Username == tbUser.Text);
             if (user != null)
@@ -100,6 +81,138 @@ namespace GUI
                     MessageBox.Show("Vui lòng nhập đúng các trường");
                 }
 
+            }
+        }
+        #endregion
+        #region sua user
+        private async void btnSua_Click(object sender, EventArgs e)
+        {
+            //mã hóa textbox pw
+            string hash = Program.EncryptSHA512Managed(tbPw.Text);
+            //string hash = BCrypt.Net.BCrypt.HashPassword(tbPw.Text, salt);
+            var user = listUsers.FirstOrDefault(u => u.Username == tbUser.Text);
+            if (user != null)
+            {
+                //hàm sửa cho phép các textbox được để trống, chỉ những textbox có value mới sửa đổi
+                if (tbPw.Text == "")
+                {
+                    //nếu texboxPw trống thì cho phép null để không hiện cảnh báo, 
+                    tbPw.AllowNull = true;
+                }
+                else
+                {
+                    ////tbPw.ErrorLable(true);
+                    user.Password = hash;
+                }
+                if (tbEmail.Text != "")
+                {
+                    user.Email = tbEmail.Text;
+                }
+                if (cbbRule.Text != "")
+                {
+                    //kiểm tra nếu value của ccb đang nhập không phải qtv => checkRule
+                    if (cbbRule.Text != "Quản trị viên")
+                    {
+                        if (CheckRule("Sua"))
+                        {
+                            user.Rule = cbbRule.SelectedItem.ToString();
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        user.Rule = cbbRule.SelectedItem.ToString();
+                    }
+
+                }
+                else
+                {
+                    lbError.Text = "";
+                    ////lbError.Visible = false;
+                }
+                //trong textboxcustom đã validation sẵn,thay vì phải validate lại chỉ cần kiểm tra label error của nó, nếu trống => không có lỗi => cho phép thực thi
+                if (tbUser.Error == "" && tbPw.Error == "" && tbEmail.Error == "" && lbError.Text == "")
+                {
+                    saveJson();
+                    resetDgvUser();
+                    dgvUser.DataSource = listUsers;
+                    tbPw.AllowNull = false;
+                    MessageBox.Show("Sửa thành công");
+                    //nếu user bị xóa quyền qtv là user đang đăng nhập => thông báo và ẩn form quản lý user
+                    if (Program.rule != "Quản trị viên")
+                    {
+                        MessageBox.Show("Bạn không còn là quản trị viên nữa");
+                        this.Hide();
+                    }
+                    Clear();
+                }
+                else
+                {
+                    MessageBox.Show("Vui lòng nhập đúng các trường");
+                    await Task.Delay(3000);
+                    lbError.Text = "";
+                    lbError.Visible = false;
+                }
+
+            }
+            else
+            {
+                ////tbUser.ErrorLable(true);
+                tbUser.Error = "User Name không tồn tại";
+            }
+        }
+        #endregion
+        #region xoa user
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            var user = listUsers.FirstOrDefault(u => u.Username == tbUser.Text);
+            if (user != null)
+            {
+                bool check = false;
+                //kiểm tra xem rule của user muốn xóa có phải là qtv không
+                // nếu đúng => gọi hàm checkRule kiểm tra
+                //foreach (User us in listUsers)
+                //{
+                //    if (us.Rule=="Quản trị viên")
+                //    {
+                //        check = true;
+                //    }
+                //}
+                if (user.Rule == "Quản trị viên")
+                {
+                    if (CheckRule("Xoa"))
+                    {
+                        DialogResult dr = MessageBox.Show("Tài khoản này đang là Quản trị viên, bạn có chắc muốn xóa? ", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (dr == DialogResult.Yes)
+                        {
+                            listUsers.Remove(user);
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    listUsers.Remove(user);
+                }
+                MessageBox.Show("Xóa thành công");
+                saveJson();
+                resetDgvUser();
+                dgvUser.DataSource = listUsers;
+                Clear();
+            }
+            else
+            {
+                tbUser.Error = "User Name không tồn tại";
             }
         }
         #endregion
@@ -157,138 +270,7 @@ namespace GUI
                 File.WriteAllText(fileName, UserlistJson);
             }
         }
-        #region sua user
-        private async void btnSua_Click(object sender, EventArgs e)
-        {
-            //mã hóa textbox pw
-            string hash = Program.EncryptSHA512Managed(tbPw.Text);
-            //string hash = BCrypt.Net.BCrypt.HashPassword(tbPw.Text, salt);
-            var user = listUsers.FirstOrDefault(u => u.Username == tbUser.Text);
-            if (user != null)
-            {
-                //hàm sửa cho phép các textbox được để trống, chỉ những textbox có value mới sửa đổi
-                if (tbPw.Text == "")
-                {
-                    //nếu texboxPw trống thì cho phép null để không hiện cảnh báo, 
-                    tbPw.AllowNull = true;
-                }
-                else
-                {
-                    tbPw.ErrorLable(true);
-                    user.Password = hash;
-                }
-                if (tbEmail.Text != "")
-                {
-                    user.Email = tbEmail.Text;
-                }
-                if (cbbRule.Text != "")
-                {
-                    //kiểm tra nếu value của ccb đang nhập không phải qtv => checkRule
-                    if (cbbRule.Text != "Quản trị viên")
-                    {
-                        if (CheckRule("Sua"))
-                        {
-                            user.Rule = cbbRule.SelectedItem.ToString();
-                        }
-                        else
-                        {
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        user.Rule = cbbRule.SelectedItem.ToString();
-                    }
-
-                }
-                else
-                {
-                    lbError.Text = "";
-                    lbError.Visible = false;
-                }
-                //trong textboxcustom đã validation sẵn,thay vì phải validate lại chỉ cần kiểm tra label error của nó, nếu trống => không có lỗi => cho phép thực thi
-                if (tbUser.Error == "" && tbPw.Error == "" && tbEmail.Error == "" && lbError.Text == "")
-                {
-                    saveJson();
-                    resetDgvUser();
-                    dgvUser.DataSource = listUsers;
-                    tbPw.AllowNull = false;
-                    MessageBox.Show("Sửa thành công");
-                    //nếu user bị xóa quyền qtv là user đang đăng nhập => thông báo và ẩn form quản lý user
-                    if (Program.rule != "Quản trị viên")
-                    {
-                        MessageBox.Show("Bạn không còn là quản trị viên nữa");
-                        this.Hide();
-                    }
-                    Clear();
-                }
-                else
-                {
-                    MessageBox.Show("Vui lòng nhập đúng các trường");
-                    await Task.Delay(3000);
-                    lbError.Text = "";
-                    lbError.Visible = false;
-                }
-
-            }
-            else
-            {
-                tbUser.ErrorLable(true);
-                tbUser.Error = "User Name không tồn tại";
-            }
-        }
-        #endregion
-        #region xoa user
-        private void btnXoa_Click(object sender, EventArgs e)
-        {
-            var user = listUsers.FirstOrDefault(u => u.Username == tbUser.Text);
-            if (user != null)
-            {
-                bool check = false;
-                //kiểm tra xem rule của user muốn xóa có phải là qtv không
-                // nếu đúng => gọi hàm checkRule kiểm tra
-                //foreach (User us in listUsers)
-                //{
-                //    if (us.Rule=="Quản trị viên")
-                //    {
-                //        check = true;
-                //    }
-                //}
-                if (cbbRule.Text == "Quản trị viên")
-                {
-                    if (CheckRule("Xoa"))
-                    {
-                        DialogResult dr = MessageBox.Show("Tài khoản này đang là Quản trị viên, bạn có chắc muốn xóa? ", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                        if (dr == DialogResult.Yes)
-                        {
-                            listUsers.Remove(user);
-                        }
-                        else
-                        {
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        return;
-                    }
-                }
-                else
-                {
-                    listUsers.Remove(user);
-                }
-                MessageBox.Show("Xóa thành công");
-                saveJson();
-                resetDgvUser();
-                dgvUser.DataSource = listUsers;
-                Clear();
-            }
-            else
-            {
-                tbUser.Error = "User Name không tồn tại";
-            }
-        }
-        #endregion
+        
         private void dgvUser_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex == -1) return;
@@ -297,7 +279,9 @@ namespace GUI
             //nếu khác thì làm trống textbox => mục đích khi ngươi dùng nhấn vào cùng 1 cell lần đầu thì fill value, lần 2 sẽ clear value
             if (!tbUser.Text.Equals(row.Cells[0].Value.ToString()) || tbUser.Text == "")
             {
+                //gán value từ cell vào textbox
                 tbUser.Text = row.Cells[0].Value.ToString();
+                //nếu cell[2] có value khác rỗng, gán value vào textbox email
                 if (row.Cells[2].Value != null)
                 {
                     tbEmail.Text = row.Cells[2].Value.ToString();
@@ -388,12 +372,22 @@ namespace GUI
         public void Clear()
         {
             tbUser.Text = null;
-            tbUser.ErrorLable(false);
+            ////tbUser.ErrorLable(false);
+            tbUser.Error = "";
             tbPw.Text = null;
-            tbPw.ErrorLable(false);
+            ////tbPw.ErrorLable(false);
+            tbPw.Error = "";
             tbEmail.Text = null;
             cbbRule.SelectedIndex = -1;
 
+        }
+
+        private void cbbRule_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbbRule.SelectedIndex !=-1)
+            {
+                lbError.Text = null;
+            }
         }
     }
 }

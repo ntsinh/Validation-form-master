@@ -16,6 +16,7 @@ using BLL;
 using Newtonsoft.Json;
 using LicenseContext = OfficeOpenXml.LicenseContext;
 using GUI.Components.Textboxs;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace GUI
 {
@@ -29,9 +30,10 @@ namespace GUI
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
         }
-        int cbbFilter;
         private void frmSPKD_Load(object sender, EventArgs e)
         {
+            // cấp quyền truy cập cho từng loại user
+            // nếu rule của user là khách thì ẩn các nút thêm xóa sửa, kiểm duyệt viên thì ẩn nút xóa
             if (Program.rule.Equals("Khách"))
             {
                 btnThem.Enabled = false;
@@ -42,8 +44,8 @@ namespace GUI
             {
                 btnXoa.Enabled = false;
             }
-
         }
+        // import data từ file excel
         private void btnImport_Click(object sender, EventArgs e)
         {
             try
@@ -52,7 +54,6 @@ namespace GUI
                 op.Filter = "Excel Sheet(*.xlsx)|*.xlsx|All Files(*.*)|*.*";
                 if (op.ShowDialog() == DialogResult.OK)
                 {
-                    //DataTable dt = new DataTable();
                     string filePath = op.FileName;
                     ApiBLL apiBLL = new ApiBLL();
                     var data = apiBLL.ReadExcelFileForGUI(filePath);
@@ -70,7 +71,7 @@ namespace GUI
                 MessageBox.Show("Trường dữ liệu của file không hợp lệ");
             }
         }
-
+        // export data vào file excel
         private void btnExport_Click(object sender, EventArgs e)
         {
             if (dgvSpkd.RowCount > 0)
@@ -114,44 +115,29 @@ namespace GUI
                 MessageBox.Show("Không có dữ liệu để export");
             }
         }
-        private void saveJson()
-        {
-            var UserlistJson = JsonConvert.SerializeObject(listDssp);
-            string fileName = @"D:\WinForm\Validation-form-master\UserList.json";
-            if (File.Exists(fileName) == false)
-            {
-                File.WriteAllText(fileName, UserlistJson);
-            }
-            else
-            {
-                File.Delete(fileName);
-                File.WriteAllText(fileName, UserlistJson);
-            }
-        }
 
         private void textBoxCustom1_UCTextChanged(object sender, EventArgs e)
         {
-
-            if (tbSearchBox.Text != "")
-            {
-                //check();
-                FilterData();
-            }
+            //mỗi khi textbox được gõ thì sẽ gọi hàm filter data lên
+            FilterData();
+            //if (tbSearchBox.Text != "")
+            //{
+            //    //check();
+            //    FilterData();
+            //}
 
         }
         bool isVisible = true;
+        //lọc data dựa theo textbox, checkbox và combobox
         private void FilterData()
         {
-
             bool checkboxChecked = cbKinhdoanh.Checked;
             string filterText = tbSearchBox.Text;
-
+            // đếm row của datagridview, nếu row lớn hơn 0 thi lọc
             if (dgvSpkd.RowCount > 0)
             {
                 foreach (DataGridViewRow row in dgvSpkd.Rows)
                 {
-
-
                     if (cbbPhamvi.Text == "Tất cả")
                     {
                         foreach (DataGridViewCell cell in row.Cells)
@@ -224,78 +210,65 @@ namespace GUI
                 MessageBox.Show("Chưa có dữ liệu");
             }
         }
-        private void check()
-        {
-            bool checkboxChecked = cbKinhdoanh.Checked;
-            bool check = true;
-            foreach (DataGridViewRow data in dgvSpkd.Rows)
-            {
-                for (int i = 0; i < 5; i++)
-                {
+        #region check
+        //private void check()
+        //{
+        //    bool checkboxChecked = cbKinhdoanh.Checked;
+        //    bool check = true;
+        //    foreach (DataGridViewRow data in dgvSpkd.Rows)
+        //    {
+        //        for (int i = 0; i < 5; i++)
+        //        {
 
-                    if ((data.Cells[i].Value.ToString() != "") && data.Cells[i].Value.ToString().Contains(tbSearchBox.Text))
-                    {
-                        check = true; break;
-                    }
-                    else
-                    {
-                        check = false;
-                    }
-                }
-                if (check == true)
-                {
-                    if (checkboxChecked)
-                    {
-                        if (data.Cells[4].Value.ToString().Equals("Đang kinh doanh"))
-                        {
-                            data.Visible = true;
-                            break;
-                        }
-                        else
-                        {
-                            dgvSpkd.CurrentCell = null;
-                            data.Visible = false;
-                        }
-                    }
-                    else
-                    {
-                        data.Visible = true;
-                        break;
-                    }
+        //            if ((data.Cells[i].Value.ToString() != "") && data.Cells[i].Value.ToString().Contains(tbSearchBox.Text))
+        //            {
+        //                check = true; break;
+        //            }
+        //            else
+        //            {
+        //                check = false;
+        //            }
+        //        }
+        //        if (check == true)
+        //        {
+        //            if (checkboxChecked)
+        //            {
+        //                if (data.Cells[4].Value.ToString().Equals("Đang kinh doanh"))
+        //                {
+        //                    data.Visible = true;
+        //                    break;
+        //                }
+        //                else
+        //                {
+        //                    dgvSpkd.CurrentCell = null;
+        //                    data.Visible = false;
+        //                }
+        //            }
+        //            else
+        //            {
+        //                data.Visible = true;
+        //                break;
+        //            }
 
-                }
-                else
-                {
-                    dgvSpkd.CurrentCell = null;
-                    data.Visible = false;
-                }
-            }
-        }
-
+        //        }
+        //        else
+        //        {
+        //            dgvSpkd.CurrentCell = null;
+        //            data.Visible = false;
+        //        }
+        //    }
+        //}
+        #endregion
         private void cbKinhdoanh_CheckedChanged(object sender, EventArgs e)
         {
-            //if (cbKinhdoanh.Checked)
-            //{
-            //    if (data.Cells[4].Value.ToString().Equals("Đang kinh doanh"))
-            //    {
-            //        data.Visible = true;
-            //    }
-            //    else
-            //    {
-            //        data.Visible = false;
-            //    }
-            //}
-            //else
-            //{
-            //    data.Visible = true;
-            //}
             FilterData();
-            //check();
         }
 
+        int cbbFilter;
         private void cbbPhamvi_SelectedIndexChanged(object sender, EventArgs e)
         {
             string cbbValue = cbbPhamvi.Text;
+            //gán vị trí item dựa theo tên
             switch (cbbValue)
             {
                 case "Mã Sp":
@@ -320,6 +293,7 @@ namespace GUI
         {
             filerPanelState();
         }
+        // đóng/mở panel filter
         private void filerPanelState()
         {
             if (pnlFilter.Visible == false)
@@ -335,6 +309,7 @@ namespace GUI
         }
         const int WM_PARENTNOTIFY = 0x210;
         const int WM_LBUTTONDOWN = 0x201;
+        // đóng panel filter nếu user click chuột ra ngoài panel
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == WM_LBUTTONDOWN || (m.Msg == WM_PARENTNOTIFY && (int)m.WParam == WM_LBUTTONDOWN))
@@ -368,13 +343,13 @@ namespace GUI
             tbSoluong.Text = null;
             tbMota.Text = null;
             cbbTinhTrang.SelectedIndex = -1;
-            tbMaSp.ErrorLable(false);
-            tbTenSp.ErrorLable(false);
-            tbSoluong.ErrorLable(false);
+            tbMaSp.Error = "";
+            tbTenSp.Error = "";
+            tbSoluong.Error = "";
         }
         private void btnThem_Click(object sender, EventArgs e)
         {
-            if (dgvSpkd.RowCount > 0)
+            if (listDssp != null)
             {
                 //tbMaSp.ErrorLable(true);
                 //tbTenSp.ErrorLable(true);
@@ -397,18 +372,12 @@ namespace GUI
                     Dssp sp = new Dssp();
                     sp.MaSp = tbMaSp.Text;
                     sp.TenSp = tbTenSp.Text;
-                    if (tbMaSp.Text == "" || tbTenSp.Text == "")
+                    if (tbSoluong.Error == "" && tbSoluong.Text != "" && int.Parse(tbSoluong.Text) >= 0)
                     {
-                        tbMaSp.ErrorLable(true);
-                        tbTenSp.ErrorLable(true);
-                    }
-                    if (tbSoluong.Text != "" && int.Parse(tbSoluong.Text.ToString()) >= 0)
-                    {
-                        sp.SoLuong = int.Parse(tbSoluong.Text.ToString());
+                        sp.SoLuong = int.Parse(tbSoluong.Text);
                     }
                     else
                     {
-                        tbSoluong.ErrorLable(true);
                         tbSoluong.Error = "Ít nhất bằng 0";
                     }
                     sp.MoTa = tbMota.Text;
@@ -420,7 +389,7 @@ namespace GUI
                     }
                     else
                     {
-                        cbbTinhTrang.Focus();
+                        if (tbMaSp.Error == "" && tbTenSp.Error == "") cbbTinhTrang.Focus();
                         lbError.Visible = true;
                         lbError.Text = "Chưa được chọn";
                     }
@@ -433,9 +402,7 @@ namespace GUI
                     }
                     else
                     {
-                        tbMaSp.ErrorLable(true);
-                        tbTenSp.ErrorLable(true);
-                        tbSoluong.ErrorLable(true);
+
                         MessageBox.Show("Vui lòng nhập đúng các trường");
                     }
                 }
@@ -451,7 +418,62 @@ namespace GUI
         {
             if (dgvSpkd.RowCount > 0)
             {
-
+                var sanPham = listDssp.FirstOrDefault(dssp => dssp.MaSp == tbMaSp.Text);
+                if (sanPham != null)
+                {
+                    //ngoại trừ mã sp, các trường khác nếu khác rỗng => thay đổi giá trị, nếu trống => cho phép null, không báo lỗi
+                    if (tbMaSp.Error != "")
+                    {
+                        tbMaSp.Focus();
+                    }
+                    if (tbTenSp.Text != "")
+                    {
+                        sanPham.TenSp = tbTenSp.Text;
+                    }
+                    else
+                    {
+                        tbTenSp.AllowNull = true;
+                    }
+                    if (tbSoluong.Text != "")
+                    {
+                        if (tbSoluong.Error == "") sanPham.SoLuong = int.Parse(tbSoluong.Text);
+                    }
+                    else
+                    {
+                        tbSoluong.AllowNull = true;
+                    }
+                    sanPham.MoTa = tbMota.Text;
+                    if (cbbTinhTrang.Text != "")
+                    {
+                        sanPham.TinhTrang = cbbTinhTrang.SelectedItem.ToString();
+                    }
+                    else
+                    {
+                        lbError.Text = "";
+                    }
+                    if (tbTenSp.Text == "" && tbSoluong.Text == "" && cbbTinhTrang.Text == "" && tbMota.Text == "")
+                    {
+                        MessageBox.Show("Chưa nhập giá trị");
+                        return;
+                    }
+                    if (tbMaSp.Error == "" && tbTenSp.Error == "" && tbSoluong.Error == "" && lbError.Text == "")
+                    {
+                        resetData();
+                        dgvSpkd.DataSource = listDssp;
+                        clear();
+                        tbTenSp.AllowNull = false;
+                        tbSoluong.AllowNull = false;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vui lòng nhập đúng các trường");
+                    }
+                }
+                else
+                {
+                    tbMaSp.Focus();
+                    tbMaSp.Error = "Mã sp không tồn tại";
+                }
             }
             else
             {
@@ -470,6 +492,10 @@ namespace GUI
                     resetData();
                     dgvSpkd.DataSource = listDssp;
                 }
+                else
+                {
+                    tbMaSp.Error = "Mã sp không tồn tại";
+                }
             }
             else
             {
@@ -477,5 +503,43 @@ namespace GUI
             }
         }
 
+        private void cbbTinhTrang_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbbTinhTrang.SelectedIndex != -1) lbError.Text = null;
+        }
+
+        private void dgvSpkd_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1)
+            {
+                return;
+            }
+            //kiểm tra nếu textboxUser trống hoặc có value khác với value của cellClick => fill value từ cellClick vào textbox
+            //nếu khác thì làm trống textbox => mục đích khi ngươi dùng nhấn vào cùng 1 cell lần đầu thì fill value, lần 2 sẽ clear value
+            DataGridViewRow row = dgvSpkd.Rows[e.RowIndex];
+            if (!tbMaSp.Text.Equals(row.Cells[0].Value.ToString()) || tbMaSp.Text == "")
+            {
+                //gán value từ cell vào textbox
+                tbMaSp.Text = row.Cells[0].Value.ToString();
+                tbTenSp.Text = row.Cells[1].Value.ToString();
+                tbSoluong.Text = row.Cells[2].Value.ToString();
+                //nếu cell[3] có value khác rỗng, gán value vào textbox mô tả
+                if (row.Cells[3].Value != null)
+                {
+                    tbMota.Text = row.Cells[3].Value.ToString();
+                }
+                else
+                {
+                    tbMota.Text = "";
+                }
+                cbbTinhTrang.Text = row.Cells[4].Value.ToString();
+            }
+            else
+            {
+                dgvSpkd.FirstDisplayedCell = null;
+                dgvSpkd.ClearSelection();
+                clear();
+            }
+        }
     }
 }

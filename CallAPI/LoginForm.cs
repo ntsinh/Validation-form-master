@@ -45,11 +45,6 @@ namespace UserControl2
 
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void userControl12__TextChanged(object sender, EventArgs e)
         {
 
@@ -74,7 +69,7 @@ namespace UserControl2
             //}
             if (eyeHurt > 2)
             {
-
+                //tính năng xàm xàm nghịch cho vui =))
                 if (userControl12.textBox1_Text.Equals("sorry"))
                 {
                     eyeHurt = 0;
@@ -84,9 +79,20 @@ namespace UserControl2
         }
         public void btnLogin_Click(object sender, EventArgs e)
         {
+            this.Hide();
+            SplashScreen splForm = new SplashScreen();
+            Thread t;
+            //bool stopThread = false;
+            t = new Thread(() =>
+            {
+                splForm.ShowDialog();
+            });
+            t.Start();
+            //kết nối và lấy data user từ lớp BLL
             ApiBLL apiBLL = new ApiBLL();
             List<User> u = (List<User>)apiBLL.getJsonForGUI();
             bool access = false;
+            //mã hóa password trước khi so sánh
             string encrypt = Program.EncryptSHA512Managed(userControl12.textBox1_Text);
             foreach (User user in u)
             {
@@ -98,16 +104,28 @@ namespace UserControl2
                 }
 
             }
+            Thread.Sleep(500);
             if (access)
             {
-                SplashScreen splForm = new SplashScreen();
-                this.Hide();
-                splForm.Show();
+                if (t.IsAlive)
+                {
+                    splForm.Invoke(new MethodInvoker(splForm.Close));
+                }
+                //SplashScreen splForm = new SplashScreen();
+                FormMain fm = new FormMain();
+                fm.Show();
             }
             else
             {
+                this.Show();
+                if (t.IsAlive)
+                {
+                    // Close the SplashScreen form by invoking on the UI thread
+                    splForm.Invoke(new MethodInvoker(splForm.Close));
+                }
                 MessageBox.Show("Sai UserName hoặc Password");
             }
+
         }
         //khúc này nghịch thôi =))
         private void pbEye_Click(object sender, EventArgs e)

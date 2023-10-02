@@ -39,22 +39,22 @@ namespace GUI.Components.Textboxs
                 this.Invalidate();
             }
         }
-        public async void ErrorLable(bool status)
-        {
-            if (status)
-            {
-                lblError.Show();
-                await Task.Delay(5000);
-                lblError.Hide();
-                errorProvider.SetError(txt, null);
-                //return;
-            }
-            else
-            {
-                lblError.Hide();
-                errorProvider.SetError(txt, null);
-            }
-        }
+        //public async void ErrorLable(bool status)
+        //{
+        //    if (status)
+        //    {
+        //        lblError.Show();
+        //        await Task.Delay(5000);
+        //        lblError.Hide();
+        //        errorProvider.SetError(txt, null);
+        //        //return;
+        //    }
+        //    else
+        //    {
+        //        lblError.Hide();
+        //        errorProvider.SetError(txt, null);
+        //    }
+        //}
         public ErrorProvider errorProvider1 { get; set; }
 
         /// <summary>
@@ -99,8 +99,10 @@ namespace GUI.Components.Textboxs
 
                     if (txt.Text == null || txt.Text == string.Empty)
                     {
+                        lblError.Show();
                         lblError.Text = NOT_NULL;
                         errorProvider.SetError(txt, NOT_NULL);
+                        lblError.Focus();
                         return NOT_NULL;
                     }
                     return lblError.Text;
@@ -109,9 +111,11 @@ namespace GUI.Components.Textboxs
             }
             set
             {
+                lblError.Show();
                 lblError.Text = value;
                 //txt.Focus();
                 errorProvider.SetError(txt, value);
+                timer1.Start();
             }
         }
         [Category(CategoryDisplay)]
@@ -229,7 +233,7 @@ namespace GUI.Components.Textboxs
             {
                 return;
             }
-
+            timer1.Start();
             Error = string.Empty;
             TextBox textbox = (TextBox)sender;
             // Case 1: Báo lỗi nếu có giá trị bằng rỗng
@@ -237,9 +241,9 @@ namespace GUI.Components.Textboxs
             {
                 lblError.Show();
                 Error = NOT_NULL;
-                await Task.Delay(5000);
-                lblError.Hide();
-                errorProvider.SetError(txt, "");
+                //await Task.Delay(5000);
+                //lblError.Hide();
+                //errorProvider.SetError(txt, "");
                 return;
             }
 
@@ -335,6 +339,22 @@ namespace GUI.Components.Textboxs
         }
         #endregion
 
-
+        private async void timer1_Tick(object sender, EventArgs e)
+        {
+            if (lblError.Text != "" && txt.Text == "")
+            {
+                lblError.Hide();
+                errorProvider.SetError(txt, null);
+            }
+            else if (lblError.Text == "User Name đã tồn tại" || lblError.Text == "Mã sản phẩm đã tồn tại" || lblError.Text == "Tên sản phẩm đã tồn tại")
+            {
+                lblError.Text = null;
+                errorProvider.SetError(txt, null);
+            }
+        }
+        public void showError()
+        {
+            lblError.Show();
+        }
     }
 }

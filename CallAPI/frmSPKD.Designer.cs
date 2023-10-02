@@ -437,6 +437,7 @@
             cbbTinhTrang.Name = "cbbTinhTrang";
             cbbTinhTrang.Size = new Size(184, 23);
             cbbTinhTrang.TabIndex = 1;
+            cbbTinhTrang.SelectedIndexChanged += cbbTinhTrang_SelectedIndexChanged;
             // 
             // lbError
             // 
@@ -537,6 +538,7 @@
             dgvSpkd.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvSpkd.Size = new Size(780, 356);
             dgvSpkd.TabIndex = 1;
+            dgvSpkd.CellClick += dgvSpkd_CellClick;
             // 
             // label2
             // 

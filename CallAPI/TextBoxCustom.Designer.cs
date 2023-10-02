@@ -34,6 +34,7 @@
             lblError = new Label();
             txt = new TextBox();
             errorProvider = new ErrorProvider(components);
+            timer1 = new System.Windows.Forms.Timer(components);
             tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             SuspendLayout();
@@ -100,6 +101,12 @@
             errorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
             errorProvider.ContainerControl = this;
             // 
+            // timer1
+            // 
+            timer1.Enabled = true;
+            timer1.Interval = 6000;
+            timer1.Tick += timer1_Tick;
+            // 
             // TextBoxCustom
             // 
             AutoScaleDimensions = new SizeF(6F, 14F);
@@ -125,5 +132,6 @@
         private Label label;
         private ErrorProvider errorProvider;
         private TextBox txt;
+        private System.Windows.Forms.Timer timer1;
     }
 }

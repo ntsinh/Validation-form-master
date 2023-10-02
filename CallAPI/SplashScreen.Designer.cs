@@ -35,11 +35,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
-            // timer1
-            // 
-            timer1.Enabled = true;
-            timer1.Tick += timer1_Tick;
-            // 
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.Splash4;
@@ -58,7 +53,7 @@
             progressBar1.Name = "progressBar1";
             progressBar1.Size = new Size(400, 12);
             progressBar1.Step = 50;
-            progressBar1.Style = ProgressBarStyle.Continuous;
+            progressBar1.Style = ProgressBarStyle.Marquee;
             progressBar1.TabIndex = 1;
             progressBar1.UseWaitCursor = true;
             // 

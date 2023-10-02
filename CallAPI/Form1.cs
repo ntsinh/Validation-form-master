@@ -11,7 +11,6 @@ namespace CallAPI
 
     public partial class Form1 : Form
     {
-
         List<KhoHang>? listKho;
         public Form1()
         {

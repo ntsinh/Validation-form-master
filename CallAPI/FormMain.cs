@@ -7,18 +7,22 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UserControl2;
+using Timer = System.Windows.Forms.Timer;
 
 namespace GUI
 {
     public partial class FormMain : Form
     {
+        Timer idleTimer = new Timer();
         public FormMain()
         {
             InitializeComponent();
@@ -26,6 +30,21 @@ namespace GUI
             DoubleBuffered = true;
             SetStyle(ControlStyles.ResizeRedraw, true);
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+        }
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            lastUserActivity = DateTime.Now;
+
+            // Install the mouse hook
+            mouseHookCallback = MouseHookCallback;
+            IntPtr moduleHandle = GetModuleHandle(Process.GetCurrentProcess().MainModule.ModuleName);
+            mouseHookHandle = SetWindowsHookEx(WH_MOUSE_LL, mouseHookCallback, moduleHandle, 0);
+
+            // Start a timer to check for idle timeout periodically
+            
+            idleTimer.Interval = IdleTimeout / 2; // Check every half of the idle timeout duration
+            idleTimer.Tick += IdleTimer_Tick;
+            idleTimer.Start();
         }
         //ẩn các subMenu
         private void subMenu()
@@ -175,9 +194,6 @@ namespace GUI
             showSubmenu(pnlDstk, pbUser);
         }
 
-        private void FormMain_Load(object sender, EventArgs e)
-        {
-        }
         private void pbUser_Click(object sender, EventArgs e)
         {
             showSubmenu(pnlDstk, pbUser);
@@ -309,15 +325,13 @@ namespace GUI
         }
         bool click = false;
         bool top = false;
-        int xLast, yLast, xForm, yForm, formWidth, formHeight;
+        int xLast, yLast, xForm, yForm;
         private void pnlTitleBar_MouseDown(object sender, MouseEventArgs e)
         {
             //di chuyển form khi nhấn giữ và kéo thả chuột trên tittle bar
             xLast = e.X;
             yLast = e.Y;
             click = true;
-            formWidth = this.Width;
-            formHeight = this.Height;
         }
 
         private void pnlTitleBar_MouseUp(object sender, MouseEventArgs e)
@@ -349,7 +363,7 @@ namespace GUI
                 {
                     top = false;
                 }
-                //nếu form trong trạng thái maximize và được kéo xuống 1 khoảng y = 1 thì chuyển trạng thái của form thành normal
+                //nếu form trong trạng thái maximize và được kéo xuống 1 khoảng y > 1 thì chuyển trạng thái của form thành normal
                 if (MousePosition.Y - yLast > 1)
                 {
                     if (WindowState == FormWindowState.Maximized)
@@ -413,6 +427,7 @@ namespace GUI
             base.WndProc(ref m);
         }
         #endregion
+        //hàm collapse/expand sidebar menu
         bool colapse = true;
         private void CollapseTimer_Tick(object sender, EventArgs e)
         {
@@ -444,7 +459,7 @@ namespace GUI
                 }
             }
         }
-
+        //gọi hàm Collapse sidebar menu khi bấm vào nút menu
         private void btnMenu_Click(object sender, EventArgs e)
         {
             CollapseTimer.Start();
@@ -452,9 +467,7 @@ namespace GUI
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            LoginForm lg = new LoginForm();
-            lg.Show();
-            this.Hide();
+            Logout();
         }
 
         private void btnMenu_MouseEnter(object sender, EventArgs e)
@@ -467,7 +480,75 @@ namespace GUI
             btnMenu.BackColor = Color.Transparent;
         }
 
+        private const int IdleTimeout = 900000; // 900000ms = 15 phút
+        private DateTime lastUserActivity;
+        // kiểm tra thời gian user không tương tác với form
+        #region Mouse Hook
 
+        private IntPtr mouseHookHandle;
+        private LowLevelMouseProc mouseHookCallback;
+
+        private delegate IntPtr LowLevelMouseProc(int nCode, IntPtr wParam, IntPtr lParam);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        private static extern IntPtr SetWindowsHookEx(int idHook, LowLevelMouseProc lpfn, IntPtr hMod, uint dwThreadId);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool UnhookWindowsHookEx(IntPtr hhk);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        private static extern IntPtr GetModuleHandle(string lpModuleName);
+
+        private const int WH_MOUSE_LL = 14;
+        private const int WM_MOUSEMOVE = 0x0200;
+        private const int WM_LBUTTONDOWN = 0x0201;
+        private const int WM_RBUTTONDOWN = 0x0204;
+
+        private IntPtr MouseHookCallback(int nCode, IntPtr wParam, IntPtr lParam)
+        {
+            if (nCode >= 0 && (wParam == (IntPtr)WM_MOUSEMOVE || wParam == (IntPtr)WM_LBUTTONDOWN || wParam == (IntPtr)WM_RBUTTONDOWN))
+            {
+                lastUserActivity = DateTime.Now;
+            }
+
+            return CallNextHookEx(mouseHookHandle, nCode, wParam, lParam);
+        }
+
+        #endregion
+        //nếu sau 15 phút user không tương tác sẽ tự động đăng xuất
+        private void IdleTimer_Tick(object sender, EventArgs e)
+        {
+            // Check if the idle timeout has elapsed
+            TimeSpan idleTime = DateTime.Now - lastUserActivity;
+            if (idleTime.TotalMilliseconds >= IdleTimeout)
+            {
+                idleTimer.Stop();
+                Logout();
+                MessageBox.Show("Bạn đã đăng xuất do không hoạt động trong một thời gian","Thông báo",MessageBoxButtons.OK ,MessageBoxIcon.Information);
+            } 
+        }
+
+        private void Logout()
+        {
+            LoginForm lg = new LoginForm();
+            lg.Show();
+            this.Hide();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            // Unhook the mouse hook and dispose the form
+            if (disposing && mouseHookHandle != IntPtr.Zero)
+            {
+                UnhookWindowsHookEx(mouseHookHandle);
+            }
+
+            base.Dispose(disposing);
+        }
 
         //protected override CreateParams CreateParams
         //{

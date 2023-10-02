@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            label4 = new Label();
+            tableLayoutPanel3 = new TableLayoutPanel();
             btnXoa = new CustomButton();
-            btnThem = new CustomButton();
             btnSua = new CustomButton();
+            btnThem = new CustomButton();
+            label4 = new Label();
             tableLayoutPanel1 = new TableLayoutPanel();
             tbPw = new Components.Textboxs.TextBoxCustom();
             tbUser = new Components.Textboxs.TextBoxCustom();
@@ -47,13 +48,12 @@
             password = new DataGridViewTextBoxColumn();
             email = new DataGridViewTextBoxColumn();
             Rule = new DataGridViewTextBoxColumn();
-            tableLayoutPanel3 = new TableLayoutPanel();
             panel1.SuspendLayout();
+            tableLayoutPanel3.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUser).BeginInit();
-            tableLayoutPanel3.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -67,16 +67,23 @@
             panel1.Size = new Size(830, 50);
             panel1.TabIndex = 0;
             // 
-            // label4
+            // tableLayoutPanel3
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.ForeColor = Color.FromArgb(238, 101, 37);
-            label4.Location = new Point(12, 12);
-            label4.Name = "label4";
-            label4.Size = new Size(190, 25);
-            label4.TabIndex = 12;
-            label4.Text = "Danh sách tài khoản";
+            tableLayoutPanel3.ColumnCount = 3;
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel3.Controls.Add(btnXoa, 2, 0);
+            tableLayoutPanel3.Controls.Add(btnSua, 1, 0);
+            tableLayoutPanel3.Controls.Add(btnThem, 0, 0);
+            tableLayoutPanel3.Dock = DockStyle.Right;
+            tableLayoutPanel3.Location = new Point(507, 0);
+            tableLayoutPanel3.Name = "tableLayoutPanel3";
+            tableLayoutPanel3.Padding = new Padding(0, 5, 10, 5);
+            tableLayoutPanel3.RowCount = 1;
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel3.Size = new Size(323, 50);
+            tableLayoutPanel3.TabIndex = 13;
             // 
             // btnXoa
             // 
@@ -104,6 +111,31 @@
             btnXoa.UseVisualStyleBackColor = false;
             btnXoa.Click += btnXoa_Click;
             // 
+            // btnSua
+            // 
+            btnSua.BackColor = Color.FromArgb(89, 206, 143);
+            btnSua.BackgroundColor = Color.FromArgb(89, 206, 143);
+            btnSua.BorderColor = Color.Orange;
+            btnSua.BorderRadius = 5;
+            btnSua.BorderSize = 0;
+            btnSua.Dock = DockStyle.Fill;
+            btnSua.FlatAppearance.BorderSize = 0;
+            btnSua.FlatStyle = FlatStyle.Flat;
+            btnSua.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnSua.ForeColor = Color.White;
+            btnSua.Image = Properties.Resources.update25;
+            btnSua.ImageAlign = ContentAlignment.MiddleLeft;
+            btnSua.Location = new Point(107, 8);
+            btnSua.Name = "btnSua";
+            btnSua.Padding = new Padding(0, 0, 12, 0);
+            btnSua.Size = new Size(98, 34);
+            btnSua.TabIndex = 10;
+            btnSua.Text = "Sửa";
+            btnSua.TextAlign = ContentAlignment.MiddleRight;
+            btnSua.TextColor = Color.White;
+            btnSua.UseVisualStyleBackColor = false;
+            btnSua.Click += btnSua_Click;
+            // 
             // btnThem
             // 
             btnThem.BackColor = Color.FromArgb(238, 101, 37);
@@ -130,30 +162,16 @@
             btnThem.UseVisualStyleBackColor = false;
             btnThem.Click += btnThem_Click;
             // 
-            // btnSua
+            // label4
             // 
-            btnSua.BackColor = Color.FromArgb(89, 206, 143);
-            btnSua.BackgroundColor = Color.FromArgb(89, 206, 143);
-            btnSua.BorderColor = Color.Orange;
-            btnSua.BorderRadius = 5;
-            btnSua.BorderSize = 0;
-            btnSua.Dock = DockStyle.Fill;
-            btnSua.FlatAppearance.BorderSize = 0;
-            btnSua.FlatStyle = FlatStyle.Flat;
-            btnSua.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnSua.ForeColor = Color.White;
-            btnSua.Image = Properties.Resources.update25;
-            btnSua.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSua.Location = new Point(107, 8);
-            btnSua.Name = "btnSua";
-            btnSua.Padding = new Padding(0, 0, 12, 0);
-            btnSua.Size = new Size(98, 34);
-            btnSua.TabIndex = 10;
-            btnSua.Text = "Sửa";
-            btnSua.TextAlign = ContentAlignment.MiddleRight;
-            btnSua.TextColor = Color.White;
-            btnSua.UseVisualStyleBackColor = false;
-            btnSua.Click += btnSua_Click;
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.ForeColor = Color.FromArgb(238, 101, 37);
+            label4.Location = new Point(12, 12);
+            label4.Name = "label4";
+            label4.Size = new Size(190, 25);
+            label4.TabIndex = 12;
+            label4.Text = "Danh sách tài khoản";
             // 
             // tableLayoutPanel1
             // 
@@ -277,6 +295,7 @@
             cbbRule.Name = "cbbRule";
             cbbRule.Size = new Size(183, 23);
             cbbRule.TabIndex = 1;
+            cbbRule.SelectedIndexChanged += cbbRule_SelectedIndexChanged;
             // 
             // lbError
             // 
@@ -346,24 +365,6 @@
             Rule.Name = "Rule";
             Rule.ReadOnly = true;
             // 
-            // tableLayoutPanel3
-            // 
-            tableLayoutPanel3.ColumnCount = 3;
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel3.Controls.Add(btnXoa, 2, 0);
-            tableLayoutPanel3.Controls.Add(btnSua, 1, 0);
-            tableLayoutPanel3.Controls.Add(btnThem, 0, 0);
-            tableLayoutPanel3.Dock = DockStyle.Right;
-            tableLayoutPanel3.Location = new Point(507, 0);
-            tableLayoutPanel3.Name = "tableLayoutPanel3";
-            tableLayoutPanel3.Padding = new Padding(0, 5, 10, 5);
-            tableLayoutPanel3.RowCount = 1;
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel3.Size = new Size(323, 50);
-            tableLayoutPanel3.TabIndex = 13;
-            // 
             // UserForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -379,12 +380,12 @@
             Load += UserForm_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            tableLayoutPanel3.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
             panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvUser).EndInit();
-            tableLayoutPanel3.ResumeLayout(false);
             ResumeLayout(false);
         }
 
